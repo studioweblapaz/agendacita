@@ -20,8 +20,9 @@
     
     .header{background:#fff;border-bottom:1px solid var(--line);padding:16px 0;text-align:center}
     .header-inner{width:92%;max-width:600px;margin:0 auto}
-    .logo{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:'Poppins';font-weight:700;color:var(--primary-dark);text-decoration:none;font-size:1.1rem}
+    .logo{display:inline-flex;align-items:center;gap:10px;font-family:'Poppins';font-weight:700;color:var(--primary-dark);text-decoration:none;font-size:1.1rem}
     .logo strong{color:var(--accent)}
+    .logo-mark{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--primary);color:#fff;font-weight:800}
 
     .main{width:92%;max-width:600px;margin:30px auto}
     .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:20px}
@@ -67,8 +68,7 @@
 
   <header class="header">
     <div class="header-inner">
-      <!-- El contenido de este enlace se llenará dinámicamente con JS (Logo o Texto) -->
-      <a href="index.html" class="logo" id="reservaLogoContainer"></a>
+      <a href="index.html" class="logo"><span class="logo-mark">S.</span> Studio Web <strong>La Paz</strong></a>
     </div>
   </header>
 
@@ -92,6 +92,7 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
+    // Obtener el slug de la URL (ej: ?negocio=lashes-by-ana)
     const params = new URLSearchParams(window.location.search);
     const slug = params.get('negocio');
 
@@ -112,6 +113,7 @@
       }
 
       try {
+        // Buscar el negocio por su slug
         const snapshot = await db.collection('negocios').where('slug', '==', slug).get();
         if (snapshot.empty) {
           main.innerHTML = '<div class="card"><div class="alert alert-error show">Negocio no encontrado. Verifica el link.</div></div>';
@@ -125,26 +127,12 @@
         console.log('✅ Negocio cargado:', negocioData);
         console.log('🕐 Horarios configurados:', negocioData.horarioApertura, 'a', negocioData.horarioCierre);
 
-        renderHeader(); // <-- Renderiza el logo o texto
         renderForm();
         loadServices();
         loadCitasExistentes();
       } catch (err) {
         console.error(err);
         main.innerHTML = '<div class="card"><div class="alert alert-error show">Error al cargar. Intenta de nuevo.</div></div>';
-      }
-    }
-
-    // Renderizar el encabezado (Logo o Texto por defecto)
-    function renderHeader() {
-      const logoContainer = document.getElementById('reservaLogoContainer');
-      if (negocioData.logo_url) {
-        // Si hay logo, mostrar la imagen
-        logoContainer.innerHTML = `<img src="${negocioData.logo_url}" alt="Logo del negocio" style="height:45px; max-width:200px; border-radius:8px; object-fit:contain;">`;
-        logoContainer.style.textDecoration = 'none';
-      } else {
-        // Si no hay logo, mostrar texto
-        logoContainer.innerHTML = `Studio Web <strong>La Paz</strong>`;
       }
     }
 
@@ -196,10 +184,12 @@
         </div>
       `;
 
+      // Configurar fecha mínima (hoy)
       const hoy = new Date().toISOString().split('T')[0];
       document.getElementById('fechaInput').min = hoy;
       document.getElementById('fechaInput').value = hoy;
 
+      // Event listeners
       document.getElementById('servicioSelect').addEventListener('change', handleServiceChange);
       document.getElementById('fechaInput').addEventListener('change', () => {
         horaSeleccionada = null;
@@ -232,6 +222,7 @@
 
     // 4. Cargar citas existentes (para validar cruces)
     function loadCitasExistentes() {
+      // Escuchamos en tiempo real para que si el dueño agrega una cita, se actualice al instante
       db.collection('negocios').doc(negocioId).collection('citas')
         .onSnapshot(snap => {
           citasExistentes = [];
@@ -241,7 +232,8 @@
               citasExistentes.push(c);
             }
           });
-          if (document.getElementById('fechaInput')?.value && document.getElementById('servicioSelect')?.value) {
+          // Si ya hay una fecha y servicio seleccionados, regenerar horarios
+          if (document.getElementById('fechaInput').value && document.getElementById('servicioSelect').value) {
             generarHorarios();
           }
         });
@@ -255,7 +247,7 @@
       }
     }
 
-    // 5. Generar horarios disponibles
+    // 5. Generar horarios disponibles (Lógica dinámica leyendo el Admin)
     function generarHorarios() {
       if (!servicioSeleccionado) return;
       
@@ -267,9 +259,11 @@
       horaGroup.classList.remove('hidden');
       slotsContainer.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--muted)">Calculando horarios...</div>';
 
+      // 🔑 LEEMOS los horarios reales del negocio (siempre vienen en formato 24h "HH:mm" desde el input type="time")
       const apertura = negocioData.horarioApertura || '09:00';
       const cierre = negocioData.horarioCierre || '19:00';
 
+      // Convertimos "HH:mm" a minutos totales desde las 00:00 para poder hacer matemáticas fácilmente
       const [apH, apM] = apertura.split(':').map(Number);
       const [ciH, ciM] = cierre.split(':').map(Number);
       const minApertura = (apH * 60) + apM;
@@ -277,6 +271,7 @@
 
       let slots = [];
       
+      // Avanzamos de 30 en 30 minutos desde la apertura, siempre que quepa la duración del servicio antes del cierre
       for (let t = minApertura; t + duracion <= minCierre; t += 30) {
         const h = Math.floor(t / 60);
         const m = t % 60;
@@ -285,8 +280,10 @@
         const endT = t + duracion;
         const timeEndStr = `${String(Math.floor(endT / 60)).padStart(2, '0')}:${String(endT % 60).padStart(2, '0')}`;
 
+        // Validar cruce con citas existentes en esa fecha
         const hayCruce = citasExistentes.some(c => {
           if (c.fecha !== fecha) return false;
+          // Fórmula de traslape: InicioA < FinB AND InicioB < FinA
           return timeStr < c.hora_fin && c.hora_inicio < timeEndStr;
         });
 
@@ -295,6 +292,7 @@
         }
       }
 
+      // Renderizar slots
       slotsContainer.innerHTML = '';
       if (slots.length === 0) {
         slotsContainer.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--muted)">No hay horarios disponibles para esta fecha. Prueba otro día.</div>';
@@ -304,7 +302,7 @@
       slots.forEach(time => {
         const btn = document.createElement('div');
         btn.className = 'time-slot';
-        btn.textContent = time;
+        btn.textContent = time; // Se mostrará en formato 24h (ej: "14:00")
         btn.addEventListener('click', () => {
           document.querySelectorAll('.time-slot').forEach(b => b.classList.remove('selected'));
           btn.classList.add('selected');
@@ -338,10 +336,12 @@
       btn.textContent = 'Confirmando reserva...';
 
       try {
+        // Calcular hora de fin
         const [h, m] = horaSeleccionada.split(':').map(Number);
         const fin = new Date(2000, 0, 1, h, m + servicioSeleccionado.duracion);
         const hora_fin = `${String(fin.getHours()).padStart(2,'0')}:${String(fin.getMinutes()).padStart(2,'0')}`;
 
+        // 1. Guardar la cita
         await db.collection('negocios').doc(negocioId).collection('citas').add({
           cliente_nombre: nombre,
           cliente_telefono: telefono,
@@ -357,6 +357,8 @@
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
 
+        // 2. Guardar/Actualizar cliente (para el programa de sellos)
+        // Buscamos si ya existe por teléfono
         const clienteSnap = await db.collection('negocios').doc(negocioId).collection('clientes')
           .where('telefono', '==', telefono).limit(1).get();
         
@@ -368,15 +370,18 @@
             ultima_visita: firebase.firestore.FieldValue.serverTimestamp()
           });
         } else {
+          // Actualizar última visita
           await db.collection('negocios').doc(negocioId).collection('clientes').doc(clienteSnap.docs[0].id).update({
-            nombre: nombre,
+            nombre: nombre, // Por si lo corrigió
             ultima_visita: firebase.firestore.FieldValue.serverTimestamp()
           });
         }
 
+        // Éxito
         document.getElementById('reservaForm').classList.add('hidden');
         document.querySelector('.step-indicator').classList.add('hidden');
         
+        // Mensaje de WhatsApp pre-llenado para el dueño (opcional, pero muy útil)
         const msgWhatsApp = `Hola, soy ${nombre}. Acabo de reservar una cita para *${servicioSeleccionado.nombre}* el día *${fecha}* a las *${horaSeleccionada}*. ¡Nos vemos!`;
         const linkWA = `https://wa.me/52${telefono}?text=${encodeURIComponent(msgWhatsApp)}`;
 
