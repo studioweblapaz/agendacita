@@ -51,21 +51,21 @@
     .view{display:none}
     .view.active{display:block}
 
-    /* CALENDARIO */
-    .cal-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);margin-bottom:18px}
-    .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-    .cal-head h3{font-size:1.15rem;text-transform:capitalize}
-    .cal-nav{display:flex;gap:8px}
-    .cal-nav button{width:38px;height:38px;border:1.5px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;font-size:1.1rem;color:var(--primary);display:grid;place-items:center;transition:.2s}
+    /* CALENDARIO (COMPACTO) */
+    .cal-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);margin-bottom:18px}
+    .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:10px}
+    .cal-head h3{font-size:1.1rem;text-transform:capitalize;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .cal-nav{display:flex;gap:6px;flex-shrink:0}
+    .cal-nav button{width:34px;height:34px;border:1.5px solid var(--line);border-radius:9px;background:#fff;cursor:pointer;font-size:1rem;color:var(--primary);display:grid;place-items:center;transition:.2s}
     .cal-nav button:hover{background:var(--primary-soft);border-color:var(--primary)}
-    .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-    .cal-dow{text-align:center;font-weight:700;font-size:.78rem;color:var(--muted);padding:6px 0}
-    .cal-day{aspect-ratio:1;border:1px solid transparent;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-weight:600;font-size:.9rem;cursor:pointer;transition:.15s;background:#fafbfa;position:relative}
+    .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+    .cal-dow{text-align:center;font-weight:700;font-size:.72rem;color:var(--muted);padding:4px 0}
+    .cal-day{min-width:0;aspect-ratio:auto;border:1px solid transparent;border-radius:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-weight:600;font-size:.85rem;cursor:pointer;transition:.15s;background:#fafbfa;padding:9px 0;overflow:hidden}
     .cal-day:hover{border-color:var(--primary)}
-    .cal-day.empty{background:transparent;cursor:default}
+    .cal-day.empty{background:transparent;cursor:default;border:none}
     .cal-day.today{background:var(--primary-soft);color:var(--primary-dark)}
     .cal-day.selected{background:var(--primary);color:#fff}
-    .cal-day .dot{width:6px;height:6px;border-radius:50%;background:var(--danger)}
+    .cal-day .dot{width:5px;height:5px;border-radius:50%;background:var(--danger);flex-shrink:0}
     .cal-day.selected .dot{background:#fff}
 
     /* LISTA DEL DÍA SELECCIONADO */
@@ -152,6 +152,13 @@
     }
     @media(max-width:700px){
       .form-row,.form-row-2,.form-row-3{grid-template-columns:1fr}
+      /* Calendario aún más compacto en celular */
+      .cal-card{padding:14px}
+      .cal-head h3{font-size:.95rem}
+      .cal-nav button{width:30px;height:30px;font-size:.9rem}
+      .cal-grid{gap:4px}
+      .cal-day{font-size:.76rem;padding:7px 0;border-radius:8px}
+      .cal-dow{font-size:.66rem;padding:3px 0}
     }
   </style>
 </head>
@@ -164,14 +171,14 @@
     </div>
     <!-- MENÚ ☰ -->
     <div class="menu" id="menu">
-      <button data-view="dashboard" class="active">🏠 Inicio</button>
-      <button data-view="servicios">💅🏽 Servicios</button>
+      <button data-view="dashboard" class="active">🏠 Dashboard</button>
+      <button data-view="servicios">✂️ Servicios</button>
       <button data-view="agenda">📅 Agenda</button>
       <button data-view="clientes">👥 Clientes</button>
       <button data-view="link">🔗 Link público</button>
       <button data-view="config">⚙️ Configuración</button>
       <div class="menu-divider"></div>
-      <button class="menu-logout" id="logoutBtn">Cerrar sesión</button>
+      <button class="menu-logout" id="logoutBtn">🚪 Cerrar sesión</button>
     </div>
   </header>
 
