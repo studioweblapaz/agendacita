@@ -19,6 +19,7 @@
     body{font-family:'Inter',system-ui,sans-serif;color:var(--text);background:var(--bg);line-height:1.6;min-height:100vh}
     h1,h2,h3,h4{font-family:'Poppins',sans-serif;color:var(--primary-dark)}
     
+    /* HEADER */
     .header{background:#fff;border-bottom:1px solid var(--line);padding:14px 0;position:sticky;top:0;z-index:50}
     .header-inner{width:92%;max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
     .logo{display:flex;align-items:center;gap:10px;font-family:'Poppins';font-weight:700;color:var(--primary-dark);text-decoration:none}
@@ -35,6 +36,7 @@
     .btn-success{background:var(--success);color:#fff}
     .btn-warning{background:var(--warning);color:#fff}
 
+    /* LAYOUT */
     .main{width:92%;max-width:1120px;margin:0 auto;padding:30px 0}
     .tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;background:#fff;padding:6px;border-radius:14px;border:1px solid var(--line)}
     .tab{padding:10px 18px;border-radius:10px;cursor:pointer;font-weight:600;color:var(--muted);transition:.2s;border:none;background:transparent;font-family:inherit;font-size:.9rem}
@@ -43,6 +45,7 @@
     .view{display:none}
     .view.active{display:block}
 
+    /* DASHBOARD */
     .welcome{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow);margin-bottom:24px}
     .welcome small{color:var(--muted);font-weight:600}
     .welcome h1{font-size:1.8rem;margin:4px 0 8px}
@@ -59,6 +62,7 @@
     .card p{color:var(--muted);font-size:.92rem}
     .loader{text-align:center;color:var(--muted);padding:60px 0}
 
+    /* FORMS */
     .form-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);margin-bottom:24px}
     .form-card h3{margin-bottom:18px;font-size:1.2rem}
     .form-row{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:12px;align-items:end}
@@ -75,6 +79,7 @@
     .service-price{font-weight:700;color:var(--primary);font-size:1.1rem;margin-right:16px}
     .empty{text-align:center;padding:40px;color:var(--muted);background:#fff;border-radius:var(--radius);border:1px dashed var(--line)}
 
+    /* CITAS */
     .cita-item{flex-direction:column;align-items:flex-start}
     .cita-header{display:flex;justify-content:space-between;align-items:center;width:100%;margin-bottom:8px}
     .cita-status{padding:4px 12px;border-radius:999px;font-size:.78rem;font-weight:600}
@@ -83,16 +88,19 @@
     .status-cancelada{background:#fee2e2;color:#991b1b}
     .cita-actions{display:flex;gap:8px;flex-wrap:wrap}
 
+    /* CLIENTES */
     .sellos{display:flex;gap:4px;margin-top:6px}
     .sello{width:20px;height:20px;border-radius:50%;background:var(--accent);display:grid;place-items:center;font-size:.7rem;color:#fff}
     .sello.vacio{background:var(--line)}
 
+    /* LINK PUBLICO */
     .link-box{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow)}
     .link-box h3{margin-bottom:14px}
     .link-url{background:var(--bg);padding:14px 18px;border-radius:10px;font-family:monospace;font-size:.95rem;word-break:break-all;border:1px solid var(--line);margin-bottom:14px}
     .copy-btn{background:var(--primary);color:#fff;padding:10px 20px;border:none;border-radius:10px;cursor:pointer;font-weight:600;font-family:inherit}
     .copy-btn:hover{background:var(--primary-dark)}
 
+    /* ALERT */
     .alert{padding:12px 16px;border-radius:10px;margin-bottom:14px;font-size:.9rem;display:none}
     .alert.show{display:block}
     .alert-error{background:#fee2e2;color:#991b1b;border:1px solid #fecaca}
@@ -109,12 +117,13 @@
 
   <header class="header">
     <div class="header-inner">
-      <a href="index.html" class="logo">Studio Web <strong>La Paz</strong></a>
+      <a href="index.html" class="logo"><span class="logo-mark">S.</span> Studio Web <strong>La Paz</strong></a>
       <button class="btn btn-ghost" id="logoutBtn">Cerrar sesión</button>
     </div>
   </header>
 
   <main class="main">
+    <!-- NAVEGACIÓN POR PESTAÑAS -->
     <div class="tabs">
       <button class="tab active" data-view="dashboard">🏠 Dashboard</button>
       <button class="tab" data-view="servicios">✂️ Servicios</button>
@@ -126,7 +135,9 @@
 
     <!-- VISTA: DASHBOARD -->
     <div class="view active" id="view-dashboard">
-      <div class="welcome" id="welcomeBox"><div class="loader">Cargando...</div></div>
+      <div class="welcome" id="welcomeBox">
+        <div class="loader">Cargando...</div>
+      </div>
       <div class="stats-grid" id="statsGrid">
         <div class="stat-card"><h4>Servicios</h4><div class="num" id="stat-servicios">0</div></div>
         <div class="stat-card"><h4>Citas hoy</h4><div class="num" id="stat-citas">0</div></div>
@@ -147,15 +158,26 @@
         <h3>➕ Agregar nuevo servicio</h3>
         <form id="serviceForm">
           <div class="form-row">
-            <div class="form-group"><label for="svcName">Nombre del servicio</label><input type="text" id="svcName" placeholder="Ej. Manicura gel" required></div>
-            <div class="form-group"><label for="svcPrice">Precio (MXN)</label><input type="number" id="svcPrice" placeholder="350" min="0" required></div>
-            <div class="form-group"><label for="svcDuration">Duración (min)</label><input type="number" id="svcDuration" placeholder="60" min="5" required></div>
+            <div class="form-group">
+              <label for="svcName">Nombre del servicio</label>
+              <input type="text" id="svcName" placeholder="Ej. Manicura gel" required>
+            </div>
+            <div class="form-group">
+              <label for="svcPrice">Precio (MXN)</label>
+              <input type="number" id="svcPrice" placeholder="350" min="0" required>
+            </div>
+            <div class="form-group">
+              <label for="svcDuration">Duración (min)</label>
+              <input type="number" id="svcDuration" placeholder="60" min="5" required>
+            </div>
             <button type="submit" class="btn btn-primary">Agregar</button>
           </div>
         </form>
       </div>
       <h3 style="margin-bottom:14px">Tus servicios registrados</h3>
-      <div id="servicesList" class="services-list"><div class="loader">Cargando servicios...</div></div>
+      <div id="servicesList" class="services-list">
+        <div class="loader">Cargando servicios...</div>
+      </div>
     </div>
 
     <!-- VISTA: AGENDA -->
@@ -166,27 +188,71 @@
         <div class="alert alert-success" id="citaSuccess"></div>
         <form id="citaForm">
           <div class="form-row-2">
-            <div class="form-group"><label for="citaCliente">Nombre del cliente</label><input type="text" id="citaCliente" placeholder="Ej. María Pérez" required></div>
-            <div class="form-group"><label for="citaTelefono">Teléfono</label><input type="tel" id="citaTelefono" placeholder="612 123 4567" required></div>
+            <div class="form-group">
+              <label for="citaCliente">Nombre del cliente</label>
+              <input type="text" id="citaCliente" placeholder="Ej. María Pérez" required>
+            </div>
+            <div class="form-group">
+              <label for="citaTelefono">Teléfono</label>
+              <input type="tel" id="citaTelefono" placeholder="612 123 4567" required>
+            </div>
           </div>
           <div class="form-row-3" style="margin-top:12px">
-            <div class="form-group"><label for="citaServicio">Servicio</label><select id="citaServicio" required><option value="">Selecciona un servicio</option></select></div>
-            <div class="form-group"><label for="citaFecha">Fecha</label><input type="date" id="citaFecha" required></div>
-            <div class="form-group"><label for="citaHora">Hora de inicio</label><input type="time" id="citaHora" required></div>
+            <div class="form-group">
+              <label for="citaServicio">Servicio</label>
+              <select id="citaServicio" required>
+                <option value="">Selecciona un servicio</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="citaFecha">Fecha</label>
+              <input type="date" id="citaFecha" required>
+            </div>
+            <div class="form-group">
+              <label for="citaHora">Hora de inicio</label>
+              <input type="time" id="citaHora" required>
+            </div>
           </div>
           <button type="submit" class="btn btn-primary" style="margin-top:16px">Crear cita</button>
         </form>
       </div>
+
       <h3 style="margin-bottom:14px">Citas del día</h3>
-      <div id="citasList" class="citas-list"><div class="loader">Cargando citas...</div></div>
+      <div id="citasList" class="citas-list">
+        <div class="loader">Cargando citas...</div>
+      </div>
     </div>
 
     <!-- VISTA: CLIENTES -->
     <div class="view" id="view-clientes">
       <h3 style="margin-bottom:14px">Tus clientes</h3>
-      <div id="clientesList" class="clientes-list"><div class="loader">Cargando clientes...</div></div>
+      <div id="clientesList" class="clientes-list">
+        <div class="loader">Cargando clientes...</div>
+      </div>
     </div>
 
+        <!-- VISTA: CONFIGURACIÓN -->
+    <div class="view" id="view-config">
+      <div class="form-card">
+        <h3>⚙️ Horarios de atención</h3>
+        <p style="color:var(--muted);margin-bottom:18px;font-size:.92rem">Define la hora en que abres y cierras. Los clientes solo podrán agendar dentro de este rango.</p>
+        <div class="alert alert-success" id="configSuccess"></div>
+        <form id="configForm">
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="horarioApertura">Hora de apertura</label>
+              <input type="time" id="horarioApertura" required>
+            </div>
+            <div class="form-group">
+              <label for="horarioCierre">Hora de cierre</label>
+              <input type="time" id="horarioCierre" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="margin-top:16px">Guardar horarios</button>
+        </form>
+      </div>
+    </div>
+    
     <!-- VISTA: LINK PÚBLICO -->
     <div class="view" id="view-link">
       <div class="link-box">
@@ -195,32 +261,6 @@
         <div class="link-url" id="linkUrl">Generando...</div>
         <button class="copy-btn" id="copyBtn">📋 Copiar link</button>
         <p style="color:var(--muted);font-size:.85rem;margin-top:14px">💡 Tip: Pégalo en la bio de tu Instagram con un texto como "Agenda tu cita aquí 👇"</p>
-      </div>
-    </div>
-
-    <!-- VISTA: CONFIGURACIÓN -->
-    <div class="view" id="view-config">
-      <div class="form-card">
-        <h3>📸 Logo del negocio</h3>
-        <p style="color:var(--muted);margin-bottom:18px;font-size:.92rem">Sube el logo de tu negocio. Se mostrará en tu link de reservas público.</p>
-        <div class="form-group" style="margin-bottom:24px; padding-bottom:24px; border-bottom:1px solid var(--line);">
-          <label for="logoInput">Seleccionar imagen</label>
-          <input type="file" id="logoInput" accept="image/*" style="padding:8px; background:#fff;">
-          <img id="logoPreview" src="" alt="Vista previa del logo" style="max-width:150px; margin-top:12px; border-radius:10px; display:none; border:1px solid var(--line); box-shadow:var(--shadow);">
-          <button type="button" id="uploadLogoBtn" class="btn btn-primary" style="margin-top:12px; display:none; width:auto; padding:10px 20px;">Subir a Cloudinary</button>
-          <div class="alert alert-success" id="logoSuccess" style="margin-top:12px;"></div>
-        </div>
-
-        <h3>⚙️ Horarios de atención</h3>
-        <p style="color:var(--muted);margin-bottom:18px;font-size:.92rem">Define la hora en que abres y cierras. Los clientes solo podrán agendar dentro de este rango.</p>
-        <div class="alert alert-success" id="configSuccess"></div>
-        <form id="configForm">
-          <div class="form-row-2">
-            <div class="form-group"><label for="horarioApertura">Hora de apertura</label><input type="time" id="horarioApertura" required></div>
-            <div class="form-group"><label for="horarioCierre">Hora de cierre</label><input type="time" id="horarioCierre" required></div>
-          </div>
-          <button type="submit" class="btn btn-primary" style="margin-top:16px">Guardar horarios</button>
-        </form>
       </div>
     </div>
   </main>
@@ -245,10 +285,7 @@
     let currentNegocio = null;
     let serviciosCache = [];
 
-    // ===== CONFIGURACIÓN CLOUDINARY =====
-    const CLOUD_NAME = 'oxznb5kn'; 
-    const UPLOAD_PRESET = 'agenda de citas'; // ⚠️ Si da error, cámbialo a 'agenda_de_citas' (sin espacios)
-
+    // ===== NAVEGACIÓN POR PESTAÑAS =====
     function switchTab(name) {
       document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.view === name));
       document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === 'view-' + name));
@@ -257,6 +294,7 @@
     }
     document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => switchTab(t.dataset.view)));
 
+    // ===== AUTENTICACIÓN =====
     auth.onAuthStateChanged(async (user) => {
       if (!user) { window.location.href = 'registro.html'; return; }
       currentUser = user;
@@ -288,63 +326,7 @@
     function loadConfig() {
       document.getElementById('horarioApertura').value = currentNegocio.horarioApertura || '09:00';
       document.getElementById('horarioCierre').value = currentNegocio.horarioCierre || '19:00';
-      
-      const preview = document.getElementById('logoPreview');
-      if (currentNegocio.logo_url) {
-        preview.src = currentNegocio.logo_url;
-        preview.style.display = 'block';
-      }
     }
-
-    // Previsualizar imagen al seleccionar archivo
-    document.getElementById('logoInput').addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        document.getElementById('logoPreview').src = URL.createObjectURL(file);
-        document.getElementById('logoPreview').style.display = 'block';
-        document.getElementById('uploadLogoBtn').style.display = 'inline-flex';
-        document.getElementById('logoSuccess').classList.remove('show');
-      }
-    });
-
-    // Subir a Cloudinary y guardar en Firestore
-    document.getElementById('uploadLogoBtn').addEventListener('click', async () => {
-      const file = document.getElementById('logoInput').files[0];
-      if (!file) return;
-      
-      const btn = document.getElementById('uploadLogoBtn');
-      const successBox = document.getElementById('logoSuccess');
-      btn.disabled = true;
-      btn.textContent = 'Subiendo...';
-      successBox.classList.remove('show');
-
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('upload_preset', UPLOAD_PRESET);
-
-      try {
-        const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
-          method: 'POST',
-          body: formData
-        });
-        const data = await res.json();
-        
-        if (data.secure_url) {
-          await db.collection('negocios').doc(currentUser.uid).update({ logo_url: data.secure_url });
-          currentNegocio.logo_url = data.secure_url;
-          successBox.textContent = '✅ Logo actualizado correctamente. Ya se verá en tu link de reservas.';
-          successBox.classList.add('show');
-        } else {
-          throw new Error(data.error ? data.error.message : 'Error desconocido de Cloudinary');
-        }
-      } catch (err) {
-        console.error(err);
-        alert('Error al subir: ' + err.message + '. Verifica que el Upload Preset sea correcto (ej: agenda_de_citas).');
-      } finally {
-        btn.disabled = false;
-        btn.textContent = 'Subir a Cloudinary';
-      }
-    });
 
     document.getElementById('configForm').addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -353,7 +335,10 @@
       const okBox = document.getElementById('configSuccess');
       okBox.classList.remove('show');
       try {
-        await db.collection('negocios').doc(currentUser.uid).update({ horarioApertura: apertura, horarioCierre: cierre });
+        await db.collection('negocios').doc(currentUser.uid).update({
+          horarioApertura: apertura,
+          horarioCierre: cierre
+        });
         currentNegocio.horarioApertura = apertura;
         currentNegocio.horarioCierre = cierre;
         okBox.textContent = '✅ Horarios guardados. Ya se reflejan en tu link público.';
@@ -378,6 +363,7 @@
       });
     });
 
+    // ===== SERVICIOS =====
     function loadServices() {
       const list = document.getElementById('servicesList');
       db.collection('negocios').doc(currentUser.uid).collection('servicios')
@@ -389,16 +375,23 @@
             document.getElementById('stat-servicios').textContent = '0';
             return;
           }
-          let html = '', count = 0;
+          let html = '';
+          let count = 0;
           snap.forEach(doc => {
             count++;
             const s = doc.data();
             serviciosCache.push({ id: doc.id, ...s });
-            html += `<div class="service-item">
-              <div class="service-info"><h4>${s.nombre}</h4><span>⏱ ${s.duracion} min</span></div>
-              <div style="display:flex;align-items:center"><span class="service-price">$${s.precio}</span>
-              <button class="btn btn-danger btn-sm" onclick="deleteService('${doc.id}')">Eliminar</button></div>
-            </div>`;
+            html += `
+              <div class="service-item">
+                <div class="service-info">
+                  <h4>${s.nombre}</h4>
+                  <span>⏱ ${s.duracion} min</span>
+                </div>
+                <div style="display:flex;align-items:center">
+                  <span class="service-price">$${s.precio}</span>
+                  <button class="btn btn-danger btn-sm" onclick="deleteService('${doc.id}')">Eliminar</button>
+                </div>
+              </div>`;
           });
           list.innerHTML = html;
           document.getElementById('stat-servicios').textContent = count;
@@ -416,20 +409,31 @@
       if (!nombre || !precio || !duracion) return;
 
       const btn = e.target.querySelector('button');
-      btn.disabled = true; btn.textContent = 'Guardando...';
+      btn.disabled = true;
+      btn.textContent = 'Guardando...';
+
       try {
         await db.collection('negocios').doc(currentUser.uid).collection('servicios').add({
-          nombre, precio, duracion, createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          nombre, precio, duracion,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
-        e.target.reset(); document.getElementById('svcName').focus();
-      } catch (err) { alert('Error: ' + err.message); } 
-      finally { btn.disabled = false; btn.textContent = 'Agregar'; }
+        e.target.reset();
+        document.getElementById('svcName').focus();
+      } catch (err) {
+        alert('Error: ' + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Agregar';
+      }
     });
 
     window.deleteService = async (id) => {
       if (!confirm('¿Eliminar este servicio?')) return;
-      try { await db.collection('negocios').doc(currentUser.uid).collection('servicios').doc(id).delete(); } 
-      catch (err) { alert('Error: ' + err.message); }
+      try {
+        await db.collection('negocios').doc(currentUser.uid).collection('servicios').doc(id).delete();
+      } catch (err) {
+        alert('Error: ' + err.message);
+      }
     };
 
     function cargarServiciosEnSelect() {
@@ -437,12 +441,16 @@
       select.innerHTML = '<option value="">Selecciona un servicio</option>';
       serviciosCache.forEach(s => {
         const opt = document.createElement('option');
-        opt.value = s.id; opt.textContent = `${s.nombre} - $${s.precio} - ${s.duracion}min`;
-        opt.dataset.precio = s.precio; opt.dataset.duracion = s.duracion; opt.dataset.nombre = s.nombre;
+        opt.value = s.id;
+        opt.textContent = `${s.nombre} - $${s.precio} - ${s.duracion}min`;
+        opt.dataset.precio = s.precio;
+        opt.dataset.duracion = s.duracion;
+        opt.dataset.nombre = s.nombre;
         select.appendChild(opt);
       });
     }
 
+    // ===== AGENDA =====
     function loadCitas() {
       const list = document.getElementById('citasList');
       const hoy = new Date().toISOString().split('T')[0];
@@ -457,23 +465,33 @@
             document.getElementById('stat-ingresos').textContent = '$0';
             return;
           }
-          let html = '', countHoy = 0, ingresosHoy = 0;
+          let html = '';
+          let countHoy = 0;
+          let ingresosHoy = 0;
+          const hoyStr = hoy;
+
           snap.forEach(doc => {
             const c = doc.data();
-            if (c.fecha === hoy) { countHoy++; if (c.estado === 'completada') ingresosHoy += c.precio || 0; }
+            if (c.fecha === hoyStr) {
+              countHoy++;
+              if (c.estado === 'completada') ingresosHoy += c.precio || 0;
+            }
             const statusClass = `status-${c.estado || 'pendiente'}`;
-            html += `<div class="cita-item">
-              <div class="cita-header">
-                <div class="cita-info"><h4>${c.cliente_nombre} · ${c.servicio_nombre}</h4>
-                <span>📅 ${c.fecha} · ⏰ ${c.hora_inicio} - ${c.hora_fin} · 📱 ${c.cliente_telefono}</span></div>
-                <span class="cita-status ${statusClass}">${c.estado || 'pendiente'}</span>
-              </div>
-              <div class="cita-actions">
-                ${c.estado !== 'completada' ? `<button class="btn btn-success btn-sm" onclick="updateCita('${doc.id}','completada')">✓ Completada</button>` : ''}
-                ${c.estado !== 'cancelada' ? `<button class="btn btn-warning btn-sm" onclick="updateCita('${doc.id}','cancelada')">✗ Cancelada</button>` : ''}
-                <button class="btn btn-danger btn-sm" onclick="deleteCita('${doc.id}')">Eliminar</button>
-              </div>
-            </div>`;
+            html += `
+              <div class="cita-item">
+                <div class="cita-header">
+                  <div class="cita-info">
+                    <h4>${c.cliente_nombre} · ${c.servicio_nombre}</h4>
+                    <span>📅 ${c.fecha} · ⏰ ${c.hora_inicio} - ${c.hora_fin} · 📱 ${c.cliente_telefono}</span>
+                  </div>
+                  <span class="cita-status ${statusClass}">${c.estado || 'pendiente'}</span>
+                </div>
+                <div class="cita-actions">
+                  ${c.estado !== 'completada' ? `<button class="btn btn-success btn-sm" onclick="updateCita('${doc.id}','completada')">✓ Completada</button>` : ''}
+                  ${c.estado !== 'cancelada' ? `<button class="btn btn-warning btn-sm" onclick="updateCita('${doc.id}','cancelada')">✗ Cancelada</button>` : ''}
+                  <button class="btn btn-danger btn-sm" onclick="deleteCita('${doc.id}')">Eliminar</button>
+                </div>
+              </div>`;
           });
           list.innerHTML = html;
           document.getElementById('stat-citas').textContent = countHoy;
@@ -488,7 +506,8 @@
       e.preventDefault();
       const errorBox = document.getElementById('citaError');
       const successBox = document.getElementById('citaSuccess');
-      errorBox.classList.remove('show'); successBox.classList.remove('show');
+      errorBox.classList.remove('show');
+      successBox.classList.remove('show');
 
       const cliente_nombre = document.getElementById('citaCliente').value.trim();
       const cliente_telefono = document.getElementById('citaTelefono').value.trim();
@@ -497,64 +516,96 @@
       const hora_inicio = document.getElementById('citaHora').value;
 
       if (!cliente_nombre || !cliente_telefono || !servicioId || !fecha || !hora_inicio) return;
+
       const servicio = serviciosCache.find(s => s.id === servicioId);
       if (!servicio) return;
 
+      // Calcular hora_fin
       const [h, m] = hora_inicio.split(':').map(Number);
       const fin = new Date(2000, 0, 1, h, m + servicio.duracion);
       const hora_fin = `${String(fin.getHours()).padStart(2,'0')}:${String(fin.getMinutes()).padStart(2,'0')}`;
 
+      // VALIDACIÓN DE CRUCES
       try {
         const snapshot = await db.collection('negocios').doc(currentUser.uid).collection('citas')
-          .where('fecha', '==', fecha).where('estado', '!=', 'cancelada').get();
+          .where('fecha', '==', fecha)
+          .where('estado', '!=', 'cancelada')
+          .get();
 
         let hayCruce = false;
         snapshot.forEach(doc => {
           const c = doc.data();
-          if (hora_inicio < c.hora_fin && c.hora_inicio < hora_fin) hayCruce = true;
+          // Dos rangos [A,B] y [C,D] se traslapan si A < D y C < B
+          if (hora_inicio < c.hora_fin && c.hora_inicio < hora_fin) {
+            hayCruce = true;
+          }
         });
 
         if (hayCruce) {
           errorBox.textContent = '⚠️ Ya existe una cita en ese horario. Elige otra hora.';
-          errorBox.classList.add('show'); return;
+          errorBox.classList.add('show');
+          return;
         }
 
         const btn = e.target.querySelector('button');
-        btn.disabled = true; btn.textContent = 'Creando...';
+        btn.disabled = true;
+        btn.textContent = 'Creando...';
 
         await db.collection('negocios').doc(currentUser.uid).collection('citas').add({
-          cliente_nombre, cliente_telefono, servicio_id: servicioId, servicio_nombre: servicio.nombre,
-          precio: servicio.precio, duracion: servicio.duracion, fecha, hora_inicio, hora_fin,
-          estado: 'pendiente', createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          cliente_nombre,
+          cliente_telefono,
+          servicio_id: servicioId,
+          servicio_nombre: servicio.nombre,
+          precio: servicio.precio,
+          duracion: servicio.duracion,
+          fecha,
+          hora_inicio,
+          hora_fin,
+          estado: 'pendiente',
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
 
+        // Actualizar/crear cliente
         await db.collection('negocios').doc(currentUser.uid).collection('clientes').add({
-          nombre: cliente_nombre, telefono: cliente_telefono, sellos: 0,
+          nombre: cliente_nombre,
+          telefono: cliente_telefono,
+          sellos: 0,
           ultima_visita: firebase.firestore.FieldValue.serverTimestamp()
         });
 
         successBox.textContent = '✅ Cita creada exitosamente';
         successBox.classList.add('show');
-        e.target.reset(); document.getElementById('citaFecha').value = fecha;
+        e.target.reset();
+        document.getElementById('citaFecha').value = fecha;
+
       } catch (err) {
-        errorBox.textContent = 'Error: ' + err.message; errorBox.classList.add('show');
+        errorBox.textContent = 'Error: ' + err.message;
+        errorBox.classList.add('show');
       } finally {
         const btn = e.target.querySelector('button');
-        btn.disabled = false; btn.textContent = 'Crear cita';
+        btn.disabled = false;
+        btn.textContent = 'Crear cita';
       }
     });
 
     window.updateCita = async (id, estado) => {
-      try { await db.collection('negocios').doc(currentUser.uid).collection('citas').doc(id).update({ estado }); } 
-      catch (err) { alert('Error: ' + err.message); }
+      try {
+        await db.collection('negocios').doc(currentUser.uid).collection('citas').doc(id).update({ estado });
+      } catch (err) {
+        alert('Error: ' + err.message);
+      }
     };
 
     window.deleteCita = async (id) => {
       if (!confirm('¿Eliminar esta cita?')) return;
-      try { await db.collection('negocios').doc(currentUser.uid).collection('citas').doc(id).delete(); } 
-      catch (err) { alert('Error: ' + err.message); }
+      try {
+        await db.collection('negocios').doc(currentUser.uid).collection('citas').doc(id).delete();
+      } catch (err) {
+        alert('Error: ' + err.message);
+      }
     };
 
+    // ===== CLIENTES =====
     function loadClientes() {
       const list = document.getElementById('clientesList');
       db.collection('negocios').doc(currentUser.uid).collection('clientes')
@@ -562,26 +613,29 @@
         .onSnapshot((snap) => {
           if (snap.empty) {
             list.innerHTML = '<div class="empty">Aún no tienes clientes registrados. Se agregarán automáticamente cuando crees una cita.</div>';
-            document.getElementById('stat-clientes').textContent = '0'; return;
+            document.getElementById('stat-clientes').textContent = '0';
+            return;
           }
-          let html = '', count = 0;
+          let html = '';
+          let count = 0;
           snap.forEach(doc => {
             count++;
             const c = doc.data();
             const sellosHtml = Array.from({length: 5}, (_, i) => 
               `<div class="sello ${i < (c.sellos || 0) ? '' : 'vacio'}">${i < (c.sellos || 0) ? '✓' : ''}</div>`
             ).join('');
-            html += `<div class="cliente-item">
-              <div class="cliente-info">
-                <h4>${c.nombre}</h4>
-                <span>📱 ${c.telefono} · Última visita: ${c.ultima_visita ? new Date(c.ultima_visita.toDate()).toLocaleDateString('es-MX') : '—'}</span>
-                <div class="sellos">${sellosHtml} <span style="margin-left:8px;font-size:.82rem;color:var(--muted)">${c.sellos || 0}/5 sellos</span></div>
-              </div>
-              <div style="display:flex;gap:8px">
-                <button class="btn btn-primary btn-sm" onclick="addSello('${doc.id}', ${c.sellos || 0})">+ Sello</button>
-                <button class="btn btn-danger btn-sm" onclick="deleteCliente('${doc.id}')">Eliminar</button>
-              </div>
-            </div>`;
+            html += `
+              <div class="cliente-item">
+                <div class="cliente-info">
+                  <h4>${c.nombre}</h4>
+                  <span>📱 ${c.telefono} · Última visita: ${c.ultima_visita ? new Date(c.ultima_visita.toDate()).toLocaleDateString('es-MX') : '—'}</span>
+                  <div class="sellos">${sellosHtml} <span style="margin-left:8px;font-size:.82rem;color:var(--muted)">${c.sellos || 0}/5 sellos</span></div>
+                </div>
+                <div style="display:flex;gap:8px">
+                  <button class="btn btn-primary btn-sm" onclick="addSello('${doc.id}', ${c.sellos || 0})">+ Sello</button>
+                  <button class="btn btn-danger btn-sm" onclick="deleteCliente('${doc.id}')">Eliminar</button>
+                </div>
+              </div>`;
           });
           list.innerHTML = html;
           document.getElementById('stat-clientes').textContent = count;
@@ -599,15 +653,21 @@
           alert('🎉 ¡Cliente completó 5 sellos! Ofrécele su premio (ej. servicio gratis).');
           await db.collection('negocios').doc(currentUser.uid).collection('clientes').doc(id).update({ sellos: 0 });
         }
-      } catch (err) { alert('Error: ' + err.message); }
+      } catch (err) {
+        alert('Error: ' + err.message);
+      }
     };
 
     window.deleteCliente = async (id) => {
       if (!confirm('¿Eliminar este cliente?')) return;
-      try { await db.collection('negocios').doc(currentUser.uid).collection('clientes').doc(id).delete(); } 
-      catch (err) { alert('Error: ' + err.message); }
+      try {
+        await db.collection('negocios').doc(currentUser.uid).collection('clientes').doc(id).delete();
+      } catch (err) {
+        alert('Error: ' + err.message);
+      }
     };
 
+    // ===== CERRAR SESIÓN =====
     document.getElementById('logoutBtn').addEventListener('click', () => {
       auth.signOut().then(() => window.location.href = 'index.html');
     });
