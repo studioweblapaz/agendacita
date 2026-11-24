@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio Web La Paz | Agenda para Lashistas, Uñeras y Barberías</title>
+  <meta name="description" content="La agenda digital creada para Lashistas, Uñeras y Barberías en La Paz, BCS. Tus citas, cobros y clientes en un solo lugar. Prueba gratis 14 días.">
+  <meta name="theme-color" content="#1b4332">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Fuentes (vienen de internet, no de carpetas => SIEMPRE cargan) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- ✅ CSS EMbebido: ya no depende de ninguna carpeta -->
+  <style>
+    :root{
+      --primary:#1b4332;--primary-dark:#081c15;--primary-soft:#e8f0ec;
+      --accent:#d4af37;--accent-soft:#f6e7b8;--text:#1c2b26;--muted:#5b6b64;
+      --bg:#fff;--bg-alt:#f6f8f7;--line:#e6ebe8;--radius:18px;
+      --shadow:0 10px 30px rgba(8,28,21,.08);--shadow-lg:0 24px 60px rgba(8,28,21,.16);--max:1120px;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:80px}
+    body{font-family:'Inter',system-ui,sans-serif;color:var(--text);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+    img{max-width:100%;display:block}a{text-decoration:none;color:inherit}ul{list-style:none}
+    h1,h2,h3{font-family:'Poppins',sans-serif;line-height:1.15;color:var(--primary-dark)}
+    .container{width:92%;max-width:var(--max);margin:0 auto}.container.narrow{max-width:760px}
+    .section{padding:84px 0}.section.alt{background:var(--bg-alt)}
+    .section-title{font-size:clamp(1.7rem,3.5vw,2.4rem);text-align:center;margin-bottom:10px}
+    .section-sub{text-align:center;color:var(--muted);max-width:560px;margin:0 auto 48px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;padding:14px 26px;border-radius:999px;transition:.25s;cursor:pointer;border:none;font-size:1rem}
+    .btn-sm{padding:10px 18px;font-size:.9rem}.btn-block{width:100%}
+    .btn-primary{background:var(--primary);color:#fff;box-shadow:0 8px 20px rgba(27,67,50,.3)}
+    .btn-primary:hover{background:var(--primary-dark);transform:translateY(-2px)}
+    .btn-ghost{background:transparent;color:var(--primary);border:2px solid var(--line)}
+    .btn-ghost:hover{border-color:var(--primary)}
+    .btn-gold{background:var(--accent);color:var(--primary-dark);box-shadow:0 8px 20px rgba(212,175,55,.35)}
+    .btn-gold:hover{transform:translateY(-2px);filter:brightness(1.05)}
+    .header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+    .logo{display:flex;align-items:center;gap:10px;font-family:'Poppins';font-weight:700;color:var(--primary-dark);font-size:1.05rem}
+    .logo strong{color:var(--accent)}
+    .logo-mark{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--primary);color:#fff;font-weight:800}
+    .nav{display:flex;gap:28px}.nav a{color:var(--muted);font-weight:500;transition:.2s}.nav a:hover{color:var(--primary)}
+    .menu-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+    .menu-toggle span{width:24px;height:2px;background:var(--primary-dark);border-radius:2px;transition:.3s}
+    .hero{background:radial-gradient(1200px 600px at 80% -10%,var(--primary-soft),transparent),linear-gradient(180deg,#fff,#fbfdfc);padding:70px 0 90px;overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+    .badge{display:inline-block;background:var(--accent-soft);color:#7a5b00;padding:6px 14px;border-radius:999px;font-size:.82rem;font-weight:600;margin-bottom:18px}
+    .hero h1{font-size:clamp(2.1rem,5vw,3.4rem);font-weight:800}
+    .grad{background:linear-gradient(90deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{font-size:1.12rem;color:var(--muted);margin:18px 0 26px;max-width:520px}
+    .cta-group{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+    .trust-list{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:.92rem}
+    .hero-visual{position:relative;display:flex;justify-content:center}
+    .phone{width:300px;height:600px;background:#0a0f0d;border-radius:42px;padding:14px;box-shadow:var(--shadow-lg);position:relative}
+    .phone-notch{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#0a0f0d;border-radius:0 0 16px 16px;z-index:2}
+    .phone-screen{width:100%;height:100%;background:#fff;border-radius:30px;padding:34px 16px 16px;display:flex;flex-direction:column;overflow:hidden}
+    .screen-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+    .screen-head small{display:block;color:var(--muted);font-size:.78rem}
+    .screen-head strong{font-family:'Poppins';font-size:1rem;color:var(--primary-dark)}
+    .screen-avatar{width:34px;height:34px;border-radius:50%;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:700}
+    .agenda{display:flex;flex-direction:column;gap:10px;flex:1}
+    .slot{display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:14px;font-size:.85rem}
+    .slot time{font-weight:700;color:var(--muted);min-width:42px}
+    .slot b{display:block;font-size:.9rem;color:var(--primary-dark)}
+    .slot span{font-size:.75rem;color:var(--muted)}
+    .s-green{background:#e3f1e6}.s-pink{background:#fbe3ec}.s-yellow{background:#fdf0d8}.s-purple{background:#ece4f7}
+    .screen-foot{text-align:center;color:#b9c4bf;font-size:.72rem;padding-top:10px}
+    .float-card{position:absolute;background:#fff;border-radius:14px;padding:10px 16px;font-weight:600;font-size:.85rem;box-shadow:var(--shadow);animation:float 4s ease-in-out infinite}
+    .fc-1{top:60px;left:-10px;color:var(--primary)}.fc-2{bottom:90px;right:-15px;color:#7a5b00;animation-delay:1.5s}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow);transition:.3s}
+    .card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--primary-soft)}
+    .card h3{margin:14px 0 8px;font-size:1.25rem}.card p{color:var(--muted)}
+    .niche-icon{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;font-size:1.7rem}
+    .ni-pink{background:#fbe3ec}.ni-purple{background:#ece4f7}.ni-green{background:#e3f1e6}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:20px}
+    .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;position:relative;box-shadow:var(--shadow)}
+    .step-num{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--primary);color:#fff;font-family:'Poppins';font-weight:700;font-size:1.2rem;margin-bottom:16px}
+    .step h3{font-size:1.15rem;margin-bottom:6px}.step p{color:var(--muted)}
+    .price-card{max-width:420px;margin:0 auto;background:linear-gradient(160deg,var(--primary),var(--primary-dark));color:#fff;border-radius:24px;padding:38px;box-shadow:var(--shadow-lg);text-align:center;position:relative;overflow:hidden}
+    .price-card::before{content:"";position:absolute;top:-40%;right:-20%;width:240px;height:240px;background:radial-gradient(circle,rgba(212,175,55,.35),transparent 70%)}
+    .price-tag{display:inline-block;background:var(--accent);color:var(--primary-dark);font-weight:700;padding:6px 16px;border-radius:999px;font-size:.85rem;margin-bottom:14px;position:relative}
+    .price-amount{font-family:'Poppins';font-size:3.2rem;font-weight:800;position:relative}
+    .price-amount sup{font-size:1.4rem;vertical-align:top;color:var(--accent)}
+    .price-amount span{font-size:1rem;font-weight:500;color:#cfe0d6}
+    .price-list{margin:24px 0;text-align:left;display:flex;flex-direction:column;gap:12px;position:relative}
+    .price-list li{color:#eaf3ee;font-size:.95rem}
+    .price-card .btn{position:relative}
+    .price-note{display:block;margin-top:14px;color:#cfe0d6;font-size:.82rem;position:relative}
+    .quote{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);font-style:italic;color:var(--text)}
+    .quote footer{font-style:normal;font-weight:600;color:var(--primary);margin-top:12px}
+    .faq details{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden}
+    .faq summary{cursor:pointer;padding:18px 22px;font-weight:600;list-style:none;display:flex;justify-content:space-between;align-items:center}
+    .faq summary::-webkit-details-marker{display:none}
+    .faq summary::after{content:"+";font-size:1.4rem;color:var(--primary);transition:.3s}
+    .faq details[open] summary::after{transform:rotate(45deg)}
+    .faq p{padding:0 22px 20px;color:var(--muted)}
+    .cta-final{background:linear-gradient(135deg,var(--primary-dark),var(--primary));color:#fff;text-align:center;padding:80px 0}
+    .cta-final h2{color:#fff;font-size:clamp(1.6rem,3.5vw,2.3rem)}
+    .cta-final p{color:#cfe0d6;margin:10px 0 26px}.cta-final small{display:block;margin-top:14px;color:#cfe0d6}
+    .footer{background:var(--primary-dark);color:#cfe0d6;padding:54px 0 0}
+    .footer-inner{display:grid;grid-template-columns:1.4fr 1fr;gap:30px;padding-bottom:34px}
+    .footer .logo{color:#fff}.footer p{margin-top:10px;max-width:340px;font-size:.92rem}
+    .footer-links{display:flex;flex-direction:column;gap:10px}.footer-links a{color:#cfe0d6}.footer-links a:hover{color:var(--accent)}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,.1);text-align:center;padding:20px 0;font-size:.85rem}
+    .reveal{opacity:0;transform:translateY(24px);transition:.7s ease}.reveal.in{opacity:1;transform:none}
+    @media(max-width:900px){
+      .hero-grid{grid-template-columns:1fr;text-align:center}
+      .hero-copy .cta-group,.trust-list{justify-content:center}.lead{margin-inline:auto}
+      .grid-3,.steps{grid-template-columns:1fr}.footer-inner{grid-template-columns:1fr}
+      .nav{position:fixed;inset:72px 0 auto 0;background:#fff;flex-direction:column;gap:0;padding:10px 6%;box-shadow:var(--shadow);transform:translateY(-130%);transition:.35s;border-bottom:1px solid var(--line)}
+      .nav.open{transform:translateY(0)}.nav a{padding:14px 0;border-bottom:1px solid var(--line)}
+      .menu-toggle{display:flex}.nav-cta{display:none}
+    }
+    @media(max-width:480px){.phone{width:260px;height:520px}.section{padding:60px 0}}
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="logo"><span class="logo-mark">S.</span><span class="logo-text">Studio Web <strong>La Paz</strong></span></a>
+      <nav class="nav" id="nav">
+        <a href="#nichos">Para tu negocio</a><a href="#pasos">Cómo funciona</a>
+        <a href="#precios">Precios</a><a href="#faq">Preguntas</a>
+      </nav>
+      <a href="#precios" class="btn btn-primary btn-sm nav-cta">Probar gratis</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy reveal">
+        <span class="badge">📅 Para negocios que trabajan con citas</span>
+        <h1>Tu talento crea.<br><span class="grad">Studio Web organiza.</span></h1>
+        <p class="lead">Deja de perder tiempo respondiendo WhatsApps y cuadrando libretas. La agenda digital creada para <strong>Lashistas, Uñeras y Barberías en La Paz, BCS</strong>.</p>
+        <div class="cta-group">
+          <a href="#precios" class="btn btn-primary">Probar gratis 14 días</a>
+          <a href="#pasos" class="btn btn-ghost">Ver cómo funciona ↓</a>
+        </div>
+        <ul class="trust-list"><li>✅ Sin tarjeta de crédito</li><li>✅ Se cancela cuando quieras</li><li>✅ Funciona en tu celular</li></ul>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="phone"><div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="screen-head"><div><small>Calendario de citas</small><strong>Hoy · Miércoles 18</strong></div><span class="screen-avatar">A</span></div>
+            <ul class="agenda">
+              <li class="slot s-green"><time>10:00</time><div><b>Corte de cabello</b><span>Alex · 30 min</span></div></li>
+              <li class="slot s-pink"><time>12:00</time><div><b>Manicura</b><span>María · 60 min</span></div></li>
+              <li class="slot s-yellow"><time>14:00</time><div><b>Set de pestañas</b><span>Rosa · 90 min</span></div></li>
+              <li class="slot s-purple"><time>16:00</time><div><b>Diseño de barba</b><span>Diego · 30 min</span></div></li>
+            </ul>
+            <div class="screen-foot">Vista ilustrativa</div>
+          </div>
+        </div>
+        <div class="float-card fc-1">✓ Cita confirmada</div>
+        <div class="float-card fc-2">💰 Cobro listo · $455</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section nichos" id="nichos">
+    <div class="container">
+      <h2 class="section-title reveal">Hecho a la medida de tu negocio</h2>
+      <p class="section-sub reveal">Un solo sistema, tres formas de trabajar.</p>
+      <div class="grid-3">
+        <article class="card reveal"><div class="niche-icon ni-pink">💅</div><h3>Para Uñeras</h3><p>Controla los tiempos exactos de cada diseño. Tus clientas agendan solas y tú recibes la notificación con su referencia.</p></article>
+        <article class="card reveal"><div class="niche-icon ni-purple">👁️</div><h3>Para Lashistas</h3><p>Protege tu tiempo con cobro de señas. Olvídate de las "clientas fantasma" que no llegan a su cita.</p></article>
+        <article class="card reveal"><div class="niche-icon ni-green">💈</div><h3>Para Barberías</h3><p>Gestiona a tus barberos, asigna sillas y maneja citas presenciales y en línea en una sola pantalla.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section pasos alt" id="pasos">
+    <div class="container">
+      <h2 class="section-title reveal">Tu negocio en orden en 3 pasos</h2>
+      <div class="steps">
+        <div class="step reveal"><span class="step-num">1</span><h3>Crea tu perfil</h3><p>Sube tu logo, tus servicios y tus horarios en menos de 5 minutos.</p></div>
+        <div class="step reveal"><span class="step-num">2</span><h3>Comparte tu link</h3><p>Pégalo en tu Instagram o WhatsApp. Tus clientes eligen día y hora solos.</p></div>
+        <div class="step reveal"><span class="step-num">3</span><h3>Administra tu día</h3><p>Revisa tu agenda desde el celular, marca "completado" y cobra.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section precios" id="precios">
+    <div class="container">
+      <h2 class="section-title reveal">Un plan justo para crecer</h2>
+      <p class="section-sub reveal">Empieza gratis 14 días. Sin tarjeta, sin cobros automáticos.</p>
+      <div class="price-card reveal">
+        <span class="price-tag">Plan Profesional</span>
+        <div class="price-amount"><sup>$</sup>299 <span>MXN / mes</span></div>
+        <ul class="price-list">
+          <li>✅ Agenda ilimitada</li><li>✅ Hasta 3 profesionales</li><li>✅ Link de reservas para Instagram</li>
+          <li>✅ Registro de clientes y sellos de fidelidad</li><li>✅ Ticket de cobro por WhatsApp</li><li>✅ Soporte por WhatsApp</li>
+        </ul>
+        <a href="#" class="btn btn-primary btn-block" id="startBtn">Comenzar prueba gratis</a>
+        <small class="price-note">También puedes pagar el año y usar 12 meses por 10.</small>
+      </div>
+    </div>
+  </section>
+
+  <section class="section testimonios alt">
+    <div class="container">
+      <h2 class="section-title reveal">Negocios de La Paz que ya se organizaron</h2>
+      <div class="grid-3">
+        <blockquote class="quote reveal">"Antes perdía 2 horas al día cuadrando horarios. Ahora mis clientas agendan y yo solo atiendo."<footer>— Ana, Lashista</footer></blockquote>
+        <blockquote class="quote reveal">"Los cortes de barba ya no se me cruzan. Todo en un solo lugar."<footer>— Diego, Barbería</footer></blockquote>
+        <blockquote class="quote reveal">"Las señas me cambiaron la vida, ya no me hacen cancelaciones de último minuto."<footer>— María, Uñera</footer></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq" id="faq">
+    <div class="container narrow">
+      <h2 class="section-title reveal">Las dudas también tienen su espacio</h2>
+      <details class="reveal"><summary>¿Necesito instalar algo o comprar impresora?</summary><p>No. Funciona desde el navegador de tu celular, tablet o computadora. Puedes poner un acceso directo con el logo en tu pantalla de inicio. La impresora es opcional.</p></details>
+      <details class="reveal"><summary>¿Pierdo mis datos cuando termine la prueba?</summary><p>No. Si contratas el plan, conservas toda tu información: clientes, servicios y citas. No vuelves a capturar nada.</p></details>
+      <details class="reveal"><summary>¿El sistema envía WhatsApp automáticamente?</summary><p>Abre WhatsApp con el mensaje ya preparado (confirmación de cita o ticket). Tú solo pulsas Enviar. Más adelante puedes activar el envío automático.</p></details>
+      <details class="reveal"><summary>¿Mi equipo puede ver todos los negocios?</summary><p>No por defecto. Cada negocio y cada rol (dueño, profesional, recepción) ve solo lo que le corresponde.</p></details>
+      <details class="reveal"><summary>¿El sistema cobra con tarjeta?</summary><p>Registra cobros (efectivo, tarjeta, transferencia) y propinas. No realiza cargos bancarios por sí solo; los anticipos se cobran con tu propia pasarela.</p></details>
+    </div>
+  </section>
+
+  <section class="cta-final">
+    <div class="container reveal">
+      <h2>Haz espacio para lo que mejor sabes hacer.</h2>
+      <p>Empieza con tu próxima cita.</p>
+      <a href="#precios" class="btn btn-gold">Prueba Studio Web gratis 14 días</a>
+      <small>Sin tarjeta · Sin cobros automáticos</small>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div><a href="#" class="logo"><span class="logo-mark">V.</span> Studio Web La Paz</a><p>Agenda digital para Lashistas, Uñeras y Barberías en La Paz, BCS.</p></div>
+      <div class="footer-links"><a href="#nichos">Negocios</a><a href="#precios">Precios</a><a href="#faq">Preguntas</a><a href="#">Contacto</a></div>
+    </div>
+    <div class="footer-bottom">© <span id="year"></span> Studio Web La Paz · Hecho con 💛 en La Paz, BCS</div>
+  </footer>
+
+  <!-- ✅ JS EMbebido: tampoco depende de carpeta js/ (CORREGIDO) -->
+  <script>
+    const toggle=document.getElementById('menuToggle'),nav=document.getElementById('nav');
+    toggle?.addEventListener('click',()=>nav.classList.toggle('open'));
+    nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    document.getElementById('year').textContent=new Date().getFullYear();
+    
+    // CORRECCIÓN: Se cerraron correctamente las llaves y paréntesis del evento click
+    document.getElementById('startBtn')?.addEventListener('click', e => {
+      e.preventDefault();
+      window.location.href = 'registro.html';
+    });
+
+    if('serviceWorker' in navigator){
+      window.addEventListener('load',()=>{
+        navigator.serviceWorker.register('service-worker.js').catch(()=>{});
+      });
+    }
+  </script>
+</body>
+</html>
