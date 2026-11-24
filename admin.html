@@ -18,16 +18,26 @@
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:'Inter',system-ui,sans-serif;color:var(--text);background:var(--bg);line-height:1.6;min-height:100vh}
     h1,h2,h3,h4{font-family:'Poppins',sans-serif;color:var(--primary-dark)}
-    
+
     /* HEADER */
-    .header{background:#fff;border-bottom:1px solid var(--line);padding:14px 0;position:sticky;top:0;z-index:50}
+    .header{background:#fff;border-bottom:1px solid var(--line);padding:12px 0;position:sticky;top:0;z-index:60}
     .header-inner{width:92%;max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .logo{display:flex;align-items:center;gap:10px;font-family:'Poppins';font-weight:700;color:var(--primary-dark);text-decoration:none}
-    .logo strong{color:var(--accent)}
-    .logo-mark{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--primary);color:#fff;font-weight:800}
+    .biz-name{font-family:'Poppins';font-weight:700;color:var(--primary-dark);font-size:1.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:70%}
+    .hamburger{width:44px;height:44px;border:1.5px solid var(--line);border-radius:12px;background:#fff;cursor:pointer;display:grid;place-items:center;gap:4px;flex-direction:column;flex-shrink:0}
+    .hamburger span{display:block;width:20px;height:2px;background:var(--primary-dark);border-radius:2px}
+
+    /* MENÚ DESPLEGABLE */
+    .menu{position:absolute;top:64px;right:4%;width:260px;max-width:92%;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:8px;display:none;z-index:70}
+    .menu.open{display:block}
+    .menu button{display:flex;align-items:center;gap:10px;width:100%;padding:13px 16px;border:none;background:transparent;font-family:inherit;font-size:.95rem;font-weight:600;color:var(--text);cursor:pointer;border-radius:10px;text-align:left;transition:.2s}
+    .menu button:hover{background:var(--primary-soft)}
+    .menu button.active{background:var(--primary);color:#fff}
+    .menu .menu-divider{height:1px;background:var(--line);margin:8px 4px}
+    .menu .menu-logout{color:var(--danger)}
+    .menu .menu-logout:hover{background:#fee2e2}
+
+    /* BOTONES */
     .btn{padding:10px 18px;border:none;border-radius:999px;font-weight:600;cursor:pointer;font-family:inherit;font-size:.9rem;transition:.2s;display:inline-flex;align-items:center;gap:6px}
-    .btn-ghost{background:transparent;color:var(--primary);border:1.5px solid var(--line)}
-    .btn-ghost:hover{border-color:var(--primary)}
     .btn-primary{background:var(--primary);color:#fff}
     .btn-primary:hover{background:var(--primary-dark)}
     .btn-danger{background:#dc2626;color:#fff}
@@ -37,32 +47,44 @@
     .btn-warning{background:var(--warning);color:#fff}
 
     /* LAYOUT */
-    .main{width:92%;max-width:1120px;margin:0 auto;padding:30px 0}
-    .tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;background:#fff;padding:6px;border-radius:14px;border:1px solid var(--line)}
-    .tab{padding:10px 18px;border-radius:10px;cursor:pointer;font-weight:600;color:var(--muted);transition:.2s;border:none;background:transparent;font-family:inherit;font-size:.9rem}
-    .tab:hover{color:var(--primary)}
-    .tab.active{background:var(--primary);color:#fff}
+    .main{width:92%;max-width:1120px;margin:0 auto;padding:24px 0}
     .view{display:none}
     .view.active{display:block}
 
-    /* DASHBOARD */
-    .welcome{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow);margin-bottom:24px}
-    .welcome small{color:var(--muted);font-weight:600}
-    .welcome h1{font-size:1.8rem;margin:4px 0 8px}
-    .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .chip{background:var(--primary-soft);color:var(--primary);padding:6px 14px;border-radius:999px;font-size:.85rem;font-weight:600}
-    .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-bottom:24px}
-    .stat-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
-    .stat-card h4{font-size:.85rem;color:var(--muted);margin-bottom:6px}
-    .stat-card .num{font-size:2rem;font-weight:800;color:var(--primary);font-family:'Poppins'}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-    .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);cursor:pointer;transition:.2s}
-    .card:hover{transform:translateY(-4px);border-color:var(--primary-soft)}
-    .card h3{font-size:1.1rem;margin-bottom:6px}
-    .card p{color:var(--muted);font-size:.92rem}
-    .loader{text-align:center;color:var(--muted);padding:60px 0}
+    /* CALENDARIO */
+    .cal-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);margin-bottom:18px}
+    .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+    .cal-head h3{font-size:1.15rem;text-transform:capitalize}
+    .cal-nav{display:flex;gap:8px}
+    .cal-nav button{width:38px;height:38px;border:1.5px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;font-size:1.1rem;color:var(--primary);display:grid;place-items:center;transition:.2s}
+    .cal-nav button:hover{background:var(--primary-soft);border-color:var(--primary)}
+    .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+    .cal-dow{text-align:center;font-weight:700;font-size:.78rem;color:var(--muted);padding:6px 0}
+    .cal-day{aspect-ratio:1;border:1px solid transparent;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-weight:600;font-size:.9rem;cursor:pointer;transition:.15s;background:#fafbfa;position:relative}
+    .cal-day:hover{border-color:var(--primary)}
+    .cal-day.empty{background:transparent;cursor:default}
+    .cal-day.today{background:var(--primary-soft);color:var(--primary-dark)}
+    .cal-day.selected{background:var(--primary);color:#fff}
+    .cal-day .dot{width:6px;height:6px;border-radius:50%;background:var(--danger)}
+    .cal-day.selected .dot{background:#fff}
 
-    /* FORMS */
+    /* LISTA DEL DÍA SELECCIONADO */
+    .day-list{margin-bottom:18px}
+    .day-list h4{margin-bottom:10px;font-size:1rem}
+
+    /* BOTÓN CREAR */
+    .btn-create{width:100%;padding:14px;border:none;border-radius:12px;background:var(--accent);color:var(--primary-dark);font-weight:700;font-family:inherit;font-size:1rem;cursor:pointer;transition:.2s;margin-bottom:22px;display:flex;align-items:center;justify-content:center;gap:8px}
+    .btn-create:hover{filter:brightness(1.05);transform:translateY(-2px)}
+
+    /* CUADRÍCULA DE ESTADÍSTICAS (BOTONES) */
+    .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .stat-btn{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);cursor:pointer;transition:.2s;text-align:left;font-family:inherit}
+    .stat-btn:hover{transform:translateY(-4px);border-color:var(--primary-soft);box-shadow:0 14px 36px rgba(8,28,21,.12)}
+    .stat-btn h4{font-size:.82rem;color:var(--muted);margin-bottom:6px;font-weight:600}
+    .stat-btn .num{font-size:1.9rem;font-weight:800;color:var(--primary);font-family:'Poppins'}
+    .stat-btn .ico{font-size:1.2rem;margin-bottom:6px;display:block}
+
+    /* FORMULARIOS */
     .form-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);margin-bottom:24px}
     .form-card h3{margin-bottom:18px;font-size:1.2rem}
     .form-row{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:12px;align-items:end}
@@ -72,6 +94,7 @@
     .form-group label{font-weight:600;font-size:.85rem;color:var(--primary-dark)}
     .form-group input,.form-group select{padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;font-size:.95rem;font-family:inherit;background:#fafbfa}
     .form-group input:focus,.form-group select:focus{outline:none;border-color:var(--primary);background:#fff}
+
     .services-list,.citas-list,.clientes-list{display:flex;flex-direction:column;gap:10px}
     .service-item,.cita-item,.cliente-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--shadow);flex-wrap:wrap;gap:10px}
     .service-info h4,.cita-info h4,.cliente-info h4{font-size:1rem;margin-bottom:2px}
@@ -81,7 +104,7 @@
 
     /* CITAS */
     .cita-item{flex-direction:column;align-items:flex-start}
-    .cita-header{display:flex;justify-content:space-between;align-items:center;width:100%;margin-bottom:8px}
+    .cita-header{display:flex;justify-content:space-between;align-items:center;width:100%;margin-bottom:8px;gap:8px;flex-wrap:wrap}
     .cita-status{padding:4px 12px;border-radius:999px;font-size:.78rem;font-weight:600}
     .status-pendiente{background:#fef3c7;color:#92400e}
     .status-completada{background:#d1fae5;color:#065f46}
@@ -93,7 +116,7 @@
     .sello{width:20px;height:20px;border-radius:50%;background:var(--accent);display:grid;place-items:center;font-size:.7rem;color:#fff}
     .sello.vacio{background:var(--line)}
 
-    /* LINK PUBLICO */
+    /* LINK PÚBLICO */
     .link-box{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow)}
     .link-box h3{margin-bottom:14px}
     .link-url{background:var(--bg);padding:14px 18px;border-radius:10px;font-family:monospace;font-size:.95rem;word-break:break-all;border:1px solid var(--line);margin-bottom:14px}
@@ -106,10 +129,29 @@
     .alert-error{background:#fee2e2;color:#991b1b;border:1px solid #fecaca}
     .alert-success{background:#d1fae5;color:#065f46;border:1px solid #a7f3d0}
 
+    /* MODAL */
+    .modal-overlay{position:fixed;inset:0;background:rgba(8,28,21,.55);display:none;align-items:center;justify-content:center;z-index:100;padding:16px}
+    .modal-overlay.open{display:flex}
+    .modal{background:#fff;border-radius:var(--radius);padding:28px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 60px rgba(8,28,21,.3);position:relative}
+    .modal h3{margin-bottom:18px;font-size:1.25rem;padding-right:30px}
+    .modal-close{position:absolute;top:18px;right:18px;width:34px;height:34px;border:none;border-radius:10px;background:var(--bg);cursor:pointer;font-size:1.2rem;color:var(--muted);display:grid;place-items:center}
+    .modal-close:hover{background:var(--line);color:var(--text)}
+
+    /* GANANCIAS */
+    .gain-total{background:var(--primary-soft);border-radius:12px;padding:18px;text-align:center;margin-bottom:18px}
+    .gain-total small{color:var(--muted);font-weight:600}
+    .gain-total .amount{font-family:'Poppins';font-size:2rem;font-weight:800;color:var(--primary)}
+    .gain-list{display:flex;flex-direction:column;gap:8px}
+    .gain-row{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border:1px solid var(--line);border-radius:10px;font-size:.9rem}
+    .gain-row b{color:var(--primary)}
+
+    .loader{text-align:center;color:var(--muted);padding:40px 0}
+
+    @media(min-width:760px){
+      .stats-grid{grid-template-columns:repeat(4,1fr)}
+    }
     @media(max-width:700px){
       .form-row,.form-row-2,.form-row-3{grid-template-columns:1fr}
-      .tabs{overflow-x:auto;flex-wrap:nowrap}
-      .tab{white-space:nowrap}
     }
   </style>
 </head>
@@ -117,38 +159,53 @@
 
   <header class="header">
     <div class="header-inner">
-      <a href="index.html" class="logo"><span class="logo-mark">S.</span> Studio Web <strong>La Paz</strong></a>
-      <button class="btn btn-ghost" id="logoutBtn">Cerrar sesión</button>
+      <span class="biz-name" id="bizName">Cargando...</span>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menú"><span></span><span></span><span></span></button>
+    </div>
+    <!-- MENÚ ☰ -->
+    <div class="menu" id="menu">
+      <button data-view="dashboard" class="active">🏠 Dashboard</button>
+      <button data-view="servicios">✂️ Servicios</button>
+      <button data-view="agenda">📅 Agenda</button>
+      <button data-view="clientes">👥 Clientes</button>
+      <button data-view="link">🔗 Link público</button>
+      <button data-view="config">⚙️ Configuración</button>
+      <div class="menu-divider"></div>
+      <button class="menu-logout" id="logoutBtn">🚪 Cerrar sesión</button>
     </div>
   </header>
 
   <main class="main">
-    <!-- NAVEGACIÓN POR PESTAÑAS -->
-    <div class="tabs">
-      <button class="tab active" data-view="dashboard">🏠 Dashboard</button>
-      <button class="tab" data-view="servicios">✂️ Servicios</button>
-      <button class="tab" data-view="agenda">📅 Agenda</button>
-      <button class="tab" data-view="clientes">👥 Clientes</button>
-      <button class="tab" data-view="link">🔗 Link público</button>
-      <button class="tab" data-view="config">⚙️ Configuración</button>
-    </div>
 
     <!-- VISTA: DASHBOARD -->
     <div class="view active" id="view-dashboard">
-      <div class="welcome" id="welcomeBox">
-        <div class="loader">Cargando...</div>
+      <!-- Calendario -->
+      <div class="cal-card">
+        <div class="cal-head">
+          <h3 id="calTitle">—</h3>
+          <div class="cal-nav">
+            <button id="calPrev">◀</button>
+            <button id="calNext">▶</button>
+          </div>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
       </div>
-      <div class="stats-grid" id="statsGrid">
-        <div class="stat-card"><h4>Servicios</h4><div class="num" id="stat-servicios">0</div></div>
-        <div class="stat-card"><h4>Citas hoy</h4><div class="num" id="stat-citas">0</div></div>
-        <div class="stat-card"><h4>Clientes</h4><div class="num" id="stat-clientes">0</div></div>
-        <div class="stat-card"><h4>Ingresos del día</h4><div class="num" id="stat-ingresos">$0</div></div>
+
+      <!-- Lista del día seleccionado -->
+      <div class="day-list" id="dayList">
+        <h4 id="dayListTitle">Citas de hoy</h4>
+        <div id="dayListContent"><div class="loader">Cargando citas...</div></div>
       </div>
-      <div class="grid">
-        <div class="card" onclick="switchTab('servicios')"><h3>✂️ Servicios</h3><p>Registra tus servicios, precios y duración.</p></div>
-        <div class="card" onclick="switchTab('agenda')"><h3>📅 Agenda</h3><p>Crea y gestiona tus citas del día.</p></div>
-        <div class="card" onclick="switchTab('clientes')"><h3>👥 Clientes</h3><p>Directorio y sellos de fidelidad.</p></div>
-        <div class="card" onclick="switchTab('link')"><h3>🔗 Tu link público</h3><p>Comparte tu link para que agenden en línea.</p></div>
+
+      <!-- Botón crear -->
+      <button class="btn-create" id="openCitaModal">➕ Crear nueva cita</button>
+
+      <!-- Estadísticas (botones) -->
+      <div class="stats-grid">
+        <button class="stat-btn" data-target="agenda"><span class="ico">📅</span><h4>Citas hoy</h4><div class="num" id="stat-citas">0</div></button>
+        <button class="stat-btn" data-target="clientes"><span class="ico">👥</span><h4>Clientes</h4><div class="num" id="stat-clientes">0</div></button>
+        <button class="stat-btn" id="openGanancias"><span class="ico">💰</span><h4>Ingresos del día</h4><div class="num" id="stat-ingresos">$0</div></button>
+        <button class="stat-btn" data-target="servicios"><span class="ico">✂️</span><h4>Servicios</h4><div class="num" id="stat-servicios">0</div></button>
       </div>
     </div>
 
@@ -158,80 +215,31 @@
         <h3>➕ Agregar nuevo servicio</h3>
         <form id="serviceForm">
           <div class="form-row">
-            <div class="form-group">
-              <label for="svcName">Nombre del servicio</label>
-              <input type="text" id="svcName" placeholder="Ej. Manicura gel" required>
-            </div>
-            <div class="form-group">
-              <label for="svcPrice">Precio (MXN)</label>
-              <input type="number" id="svcPrice" placeholder="350" min="0" required>
-            </div>
-            <div class="form-group">
-              <label for="svcDuration">Duración (min)</label>
-              <input type="number" id="svcDuration" placeholder="60" min="5" required>
-            </div>
+            <div class="form-group"><label for="svcName">Nombre del servicio</label><input type="text" id="svcName" placeholder="Ej. Manicura gel" required></div>
+            <div class="form-group"><label for="svcPrice">Precio (MXN)</label><input type="number" id="svcPrice" placeholder="350" min="0" required></div>
+            <div class="form-group"><label for="svcDuration">Duración (min)</label><input type="number" id="svcDuration" placeholder="60" min="5" required></div>
             <button type="submit" class="btn btn-primary">Agregar</button>
           </div>
         </form>
       </div>
       <h3 style="margin-bottom:14px">Tus servicios registrados</h3>
-      <div id="servicesList" class="services-list">
-        <div class="loader">Cargando servicios...</div>
-      </div>
+      <div id="servicesList" class="services-list"><div class="loader">Cargando servicios...</div></div>
     </div>
 
     <!-- VISTA: AGENDA -->
     <div class="view" id="view-agenda">
-      <div class="form-card">
-        <h3>➕ Crear nueva cita</h3>
-        <div class="alert alert-error" id="citaError"></div>
-        <div class="alert alert-success" id="citaSuccess"></div>
-        <form id="citaForm">
-          <div class="form-row-2">
-            <div class="form-group">
-              <label for="citaCliente">Nombre del cliente</label>
-              <input type="text" id="citaCliente" placeholder="Ej. María Pérez" required>
-            </div>
-            <div class="form-group">
-              <label for="citaTelefono">Teléfono</label>
-              <input type="tel" id="citaTelefono" placeholder="612 123 4567" required>
-            </div>
-          </div>
-          <div class="form-row-3" style="margin-top:12px">
-            <div class="form-group">
-              <label for="citaServicio">Servicio</label>
-              <select id="citaServicio" required>
-                <option value="">Selecciona un servicio</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="citaFecha">Fecha</label>
-              <input type="date" id="citaFecha" required>
-            </div>
-            <div class="form-group">
-              <label for="citaHora">Hora de inicio</label>
-              <input type="time" id="citaHora" required>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary" style="margin-top:16px">Crear cita</button>
-        </form>
-      </div>
-
-      <h3 style="margin-bottom:14px">Citas del día</h3>
-      <div id="citasList" class="citas-list">
-        <div class="loader">Cargando citas...</div>
-      </div>
+      <button class="btn-create" id="openCitaModal2">➕ Crear nueva cita</button>
+      <h3 style="margin-bottom:14px">Todas las citas</h3>
+      <div id="citasList" class="citas-list"><div class="loader">Cargando citas...</div></div>
     </div>
 
     <!-- VISTA: CLIENTES -->
     <div class="view" id="view-clientes">
       <h3 style="margin-bottom:14px">Tus clientes</h3>
-      <div id="clientesList" class="clientes-list">
-        <div class="loader">Cargando clientes...</div>
-      </div>
+      <div id="clientesList" class="clientes-list"><div class="loader">Cargando clientes...</div></div>
     </div>
 
-        <!-- VISTA: CONFIGURACIÓN -->
+    <!-- VISTA: CONFIGURACIÓN -->
     <div class="view" id="view-config">
       <div class="form-card">
         <h3>⚙️ Horarios de atención</h3>
@@ -239,20 +247,14 @@
         <div class="alert alert-success" id="configSuccess"></div>
         <form id="configForm">
           <div class="form-row-2">
-            <div class="form-group">
-              <label for="horarioApertura">Hora de apertura</label>
-              <input type="time" id="horarioApertura" required>
-            </div>
-            <div class="form-group">
-              <label for="horarioCierre">Hora de cierre</label>
-              <input type="time" id="horarioCierre" required>
-            </div>
+            <div class="form-group"><label for="horarioApertura">Hora de apertura</label><input type="time" id="horarioApertura" required></div>
+            <div class="form-group"><label for="horarioCierre">Hora de cierre</label><input type="time" id="horarioCierre" required></div>
           </div>
           <button type="submit" class="btn btn-primary" style="margin-top:16px">Guardar horarios</button>
         </form>
       </div>
     </div>
-    
+
     <!-- VISTA: LINK PÚBLICO -->
     <div class="view" id="view-link">
       <div class="link-box">
@@ -264,6 +266,38 @@
       </div>
     </div>
   </main>
+
+  <!-- MODAL: CREAR CITA -->
+  <div class="modal-overlay" id="citaModal">
+    <div class="modal">
+      <button class="modal-close" id="closeCitaModal">✕</button>
+      <h3>➕ Crear nueva cita</h3>
+      <div class="alert alert-error" id="citaError"></div>
+      <div class="alert alert-success" id="citaSuccess"></div>
+      <form id="citaForm">
+        <div class="form-row-2">
+          <div class="form-group"><label for="citaCliente">Nombre del cliente</label><input type="text" id="citaCliente" placeholder="Ej. María Pérez" required></div>
+          <div class="form-group"><label for="citaTelefono">Teléfono</label><input type="tel" id="citaTelefono" placeholder="612 123 4567" required></div>
+        </div>
+        <div class="form-group" style="margin-top:12px"><label for="citaServicio">Servicio</label><select id="citaServicio" required><option value="">Selecciona un servicio</option></select></div>
+        <div class="form-row-2" style="margin-top:12px">
+          <div class="form-group"><label for="citaFecha">Fecha</label><input type="date" id="citaFecha" required></div>
+          <div class="form-group"><label for="citaHora">Hora de inicio</label><input type="time" id="citaHora" required></div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top:16px;width:100%">Crear cita</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: GANANCIAS -->
+  <div class="modal-overlay" id="gananciasModal">
+    <div class="modal">
+      <button class="modal-close" id="closeGanancias">✕</button>
+      <h3>💰 Historial de ganancias</h3>
+      <div class="gain-total"><small>Total acumulado (citas completadas)</small><div class="amount" id="gainTotal">$0</div></div>
+      <div id="gainList" class="gain-list"><div class="loader">Cargando...</div></div>
+    </div>
+  </div>
 
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
@@ -284,15 +318,40 @@
     let currentUser = null;
     let currentNegocio = null;
     let serviciosCache = [];
+    let citasCache = [];
+    let clientesCount = 0;
 
-    // ===== NAVEGACIÓN POR PESTAÑAS =====
+    // Estado del calendario
+    let calDate = new Date();
+    let selectedDay = new Date().toISOString().split('T')[0];
+
+    // ===== MENÚ ☰ =====
+    const menu = document.getElementById('menu');
+    document.getElementById('hamburgerBtn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      menu.classList.toggle('open');
+    });
+    document.addEventListener('click', (e) => {
+      if (!menu.contains(e.target)) menu.classList.remove('open');
+    });
+    document.querySelectorAll('.menu button[data-view]').forEach(b => {
+      b.addEventListener('click', () => { switchTab(b.dataset.view); menu.classList.remove('open'); });
+    });
+
+    // ===== NAVEGACIÓN =====
     function switchTab(name) {
-      document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.view === name));
       document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === 'view-' + name));
+      document.querySelectorAll('.menu button[data-view]').forEach(t => t.classList.toggle('active', t.dataset.view === name));
       if (name === 'agenda') cargarServiciosEnSelect();
       if (name === 'link') generarLinkPublico();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => switchTab(t.dataset.view)));
+
+    // Botones de estadísticas -> abrir vista o modal
+    document.querySelectorAll('.stat-btn[data-target]').forEach(b => {
+      b.addEventListener('click', () => switchTab(b.dataset.target));
+    });
+    document.getElementById('openGanancias').addEventListener('click', openGanancias);
 
     // ===== AUTENTICACIÓN =====
     auth.onAuthStateChanged(async (user) => {
@@ -301,27 +360,16 @@
       try {
         const snap = await db.collection('negocios').doc(user.uid).get();
         currentNegocio = snap.exists ? snap.data() : { nombre: 'Mi negocio', dueno: '—', slug: 'mi-negocio' };
-        renderDashboard();
+        document.getElementById('bizName').textContent = currentNegocio.nombre;
         loadServices();
         loadConfig();
         loadCitas();
         loadClientes();
       } catch (e) {
         console.error(e);
-        document.getElementById('welcomeBox').innerHTML = '<div class="welcome"><h1>Panel</h1><p>Error al cargar: ' + e.message + '</p></div>';
+        document.getElementById('dayListContent').innerHTML = '<div class="empty">Error al cargar: ' + e.message + '</div>';
       }
     });
-
-    function renderDashboard() {
-      document.getElementById('welcomeBox').innerHTML = `
-        <small>Bienvenido de vuelta 👋</small>
-        <h1>${currentNegocio.nombre}</h1>
-        <p>Dueño: <strong>${currentNegocio.dueno}</strong> · ${currentUser.email}</p>
-        <div class="chips">
-          <span class="chip">Plan: ${currentNegocio.plan || 'prueba'}</span>
-          <span class="chip">Prueba activa 14 días</span>
-        </div>`;
-    }
 
     function loadConfig() {
       document.getElementById('horarioApertura').value = currentNegocio.horarioApertura || '09:00';
@@ -335,17 +383,12 @@
       const okBox = document.getElementById('configSuccess');
       okBox.classList.remove('show');
       try {
-        await db.collection('negocios').doc(currentUser.uid).update({
-          horarioApertura: apertura,
-          horarioCierre: cierre
-        });
+        await db.collection('negocios').doc(currentUser.uid).update({ horarioApertura: apertura, horarioCierre: cierre });
         currentNegocio.horarioApertura = apertura;
         currentNegocio.horarioCierre = cierre;
         okBox.textContent = '✅ Horarios guardados. Ya se reflejan en tu link público.';
         okBox.classList.add('show');
-      } catch (err) {
-        alert('Error: ' + err.message);
-      }
+      } catch (err) { alert('Error: ' + err.message); }
     });
 
     function generarLinkPublico() {
@@ -353,10 +396,8 @@
       const url = `${window.location.origin}${window.location.pathname.replace('admin.html','')}reserva.html?negocio=${slug}`;
       document.getElementById('linkUrl').textContent = url;
     }
-
     document.getElementById('copyBtn').addEventListener('click', () => {
-      const url = document.getElementById('linkUrl').textContent;
-      navigator.clipboard.writeText(url).then(() => {
+      navigator.clipboard.writeText(document.getElementById('linkUrl').textContent).then(() => {
         const btn = document.getElementById('copyBtn');
         btn.textContent = '✅ Copiado';
         setTimeout(() => btn.textContent = '📋 Copiar link', 2000);
@@ -375,30 +416,20 @@
             document.getElementById('stat-servicios').textContent = '0';
             return;
           }
-          let html = '';
-          let count = 0;
+          let html = '', count = 0;
           snap.forEach(doc => {
             count++;
             const s = doc.data();
             serviciosCache.push({ id: doc.id, ...s });
-            html += `
-              <div class="service-item">
-                <div class="service-info">
-                  <h4>${s.nombre}</h4>
-                  <span>⏱ ${s.duracion} min</span>
-                </div>
-                <div style="display:flex;align-items:center">
-                  <span class="service-price">$${s.precio}</span>
-                  <button class="btn btn-danger btn-sm" onclick="deleteService('${doc.id}')">Eliminar</button>
-                </div>
-              </div>`;
+            html += `<div class="service-item">
+              <div class="service-info"><h4>${s.nombre}</h4><span>⏱ ${s.duracion} min</span></div>
+              <div style="display:flex;align-items:center"><span class="service-price">$${s.precio}</span>
+              <button class="btn btn-danger btn-sm" onclick="deleteService('${doc.id}')">Eliminar</button></div>
+            </div>`;
           });
           list.innerHTML = html;
           document.getElementById('stat-servicios').textContent = count;
-        }, (err) => {
-          console.error(err);
-          list.innerHTML = '<div class="empty">Error al cargar servicios.</div>';
-        });
+        }, (err) => { console.error(err); list.innerHTML = '<div class="empty">Error al cargar servicios.</div>'; });
     }
 
     document.getElementById('serviceForm').addEventListener('submit', async (e) => {
@@ -407,33 +438,21 @@
       const precio = parseFloat(document.getElementById('svcPrice').value);
       const duracion = parseInt(document.getElementById('svcDuration').value);
       if (!nombre || !precio || !duracion) return;
-
       const btn = e.target.querySelector('button');
-      btn.disabled = true;
-      btn.textContent = 'Guardando...';
-
+      btn.disabled = true; btn.textContent = 'Guardando...';
       try {
         await db.collection('negocios').doc(currentUser.uid).collection('servicios').add({
-          nombre, precio, duracion,
-          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          nombre, precio, duracion, createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
-        e.target.reset();
-        document.getElementById('svcName').focus();
-      } catch (err) {
-        alert('Error: ' + err.message);
-      } finally {
-        btn.disabled = false;
-        btn.textContent = 'Agregar';
-      }
+        e.target.reset(); document.getElementById('svcName').focus();
+      } catch (err) { alert('Error: ' + err.message); }
+      finally { btn.disabled = false; btn.textContent = 'Agregar'; }
     });
 
     window.deleteService = async (id) => {
       if (!confirm('¿Eliminar este servicio?')) return;
-      try {
-        await db.collection('negocios').doc(currentUser.uid).collection('servicios').doc(id).delete();
-      } catch (err) {
-        alert('Error: ' + err.message);
-      }
+      try { await db.collection('negocios').doc(currentUser.uid).collection('servicios').doc(id).delete(); }
+      catch (err) { alert('Error: ' + err.message); }
     };
 
     function cargarServiciosEnSelect() {
@@ -441,73 +460,116 @@
       select.innerHTML = '<option value="">Selecciona un servicio</option>';
       serviciosCache.forEach(s => {
         const opt = document.createElement('option');
-        opt.value = s.id;
-        opt.textContent = `${s.nombre} - $${s.precio} - ${s.duracion}min`;
-        opt.dataset.precio = s.precio;
-        opt.dataset.duracion = s.duracion;
-        opt.dataset.nombre = s.nombre;
+        opt.value = s.id; opt.textContent = `${s.nombre} - $${s.precio} - ${s.duracion}min`;
         select.appendChild(opt);
       });
     }
 
-    // ===== AGENDA =====
+    // ===== CITAS (cache + calendario + estadísticas) =====
     function loadCitas() {
-      const list = document.getElementById('citasList');
-      const hoy = new Date().toISOString().split('T')[0];
-      document.getElementById('citaFecha').value = hoy;
-
       db.collection('negocios').doc(currentUser.uid).collection('citas')
         .orderBy('fecha', 'asc')
         .onSnapshot((snap) => {
-          if (snap.empty) {
-            list.innerHTML = '<div class="empty">No hay citas. ¡Crea la primera arriba! 📅</div>';
-            document.getElementById('stat-citas').textContent = '0';
-            document.getElementById('stat-ingresos').textContent = '$0';
-            return;
-          }
-          let html = '';
-          let countHoy = 0;
-          let ingresosHoy = 0;
-          const hoyStr = hoy;
-
-          snap.forEach(doc => {
-            const c = doc.data();
-            if (c.fecha === hoyStr) {
-              countHoy++;
-              if (c.estado === 'completada') ingresosHoy += c.precio || 0;
-            }
-            const statusClass = `status-${c.estado || 'pendiente'}`;
-            html += `
-              <div class="cita-item">
-                <div class="cita-header">
-                  <div class="cita-info">
-                    <h4>${c.cliente_nombre} · ${c.servicio_nombre}</h4>
-                    <span>📅 ${c.fecha} · ⏰ ${c.hora_inicio} - ${c.hora_fin} · 📱 ${c.cliente_telefono}</span>
-                  </div>
-                  <span class="cita-status ${statusClass}">${c.estado || 'pendiente'}</span>
-                </div>
-                <div class="cita-actions">
-                  ${c.estado !== 'completada' ? `<button class="btn btn-success btn-sm" onclick="updateCita('${doc.id}','completada')">✓ Completada</button>` : ''}
-                  ${c.estado !== 'cancelada' ? `<button class="btn btn-warning btn-sm" onclick="updateCita('${doc.id}','cancelada')">✗ Cancelada</button>` : ''}
-                  <button class="btn btn-danger btn-sm" onclick="deleteCita('${doc.id}')">Eliminar</button>
-                </div>
-              </div>`;
-          });
-          list.innerHTML = html;
-          document.getElementById('stat-citas').textContent = countHoy;
-          document.getElementById('stat-ingresos').textContent = `$${ingresosHoy}`;
-        }, (err) => {
-          console.error(err);
-          list.innerHTML = '<div class="empty">Error al cargar citas.</div>';
-        });
+          citasCache = [];
+          snap.forEach(doc => citasCache.push({ id: doc.id, ...doc.data() }));
+          renderCalendario();
+          renderDayList();
+          renderStats();
+          renderAllCitas();
+        }, (err) => { console.error(err); });
     }
+
+    function renderCalendario() {
+      const year = calDate.getFullYear();
+      const month = calDate.getMonth();
+      document.getElementById('calTitle').textContent = calDate.toLocaleDateString('es-MX', { month: 'long', year: 'numeric' });
+      const firstDow = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const todayStr = new Date().toISOString().split('T')[0];
+
+      // Días con citas (no canceladas)
+      const daysWithCitas = new Set(citasCache.filter(c => c.estado !== 'cancelada').map(c => c.fecha));
+
+      const grid = document.getElementById('calGrid');
+      let html = ['L','M','M','J','V','S','D'].map(d => `<div class="cal-dow">${d}</div>`).join('');
+      // Alinear: lunes=0 -> el getDay() da 0=domingo. Convertimos.
+      const offset = (firstDow + 6) % 7;
+      for (let i = 0; i < offset; i++) html += '<div class="cal-day empty"></div>';
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        const cls = ['cal-day'];
+        if (dateStr === todayStr) cls.push('today');
+        if (dateStr === selectedDay) cls.push('selected');
+        const dot = daysWithCitas.has(dateStr) ? '<span class="dot"></span>' : '';
+        html += `<div class="${cls.join(' ')}" data-date="${dateStr}">${d}${dot}</div>`;
+      }
+      grid.innerHTML = html;
+      grid.querySelectorAll('.cal-day[data-date]').forEach(el => {
+        el.addEventListener('click', () => { selectedDay = el.dataset.date; renderCalendario(); renderDayList(); });
+      });
+    }
+
+    document.getElementById('calPrev').addEventListener('click', () => { calDate.setMonth(calDate.getMonth() - 1); renderCalendario(); });
+    document.getElementById('calNext').addEventListener('click', () => { calDate.setMonth(calDate.getMonth() + 1); renderCalendario(); });
+
+    function renderDayList() {
+      const citas = citasCache.filter(c => c.fecha === selectedDay);
+      document.getElementById('dayListTitle').textContent = `Citas del ${selectedDay}`;
+      const box = document.getElementById('dayListContent');
+      if (citas.length === 0) { box.innerHTML = '<div class="empty">Sin citas para este día.</div>'; return; }
+      box.innerHTML = citas.map(c => citaRow(c)).join('');
+    }
+
+    function citaRow(c) {
+      const statusClass = `status-${c.estado || 'pendiente'}`;
+      return `<div class="cita-item">
+        <div class="cita-header">
+          <div class="cita-info"><h4>${c.cliente_nombre} · ${c.servicio_nombre}</h4>
+          <span>⏰ ${c.hora_inicio} - ${c.hora_fin} · 📱 ${c.cliente_telefono}</span></div>
+          <span class="cita-status ${statusClass}">${c.estado || 'pendiente'}</span>
+        </div>
+        <div class="cita-actions">
+          ${c.estado !== 'completada' ? `<button class="btn btn-success btn-sm" onclick="updateCita('${c.id}','completada')">✓ Completada</button>` : ''}
+          ${c.estado !== 'cancelada' ? `<button class="btn btn-warning btn-sm" onclick="updateCita('${c.id}','cancelada')">✗ Cancelada</button>` : ''}
+          <button class="btn btn-danger btn-sm" onclick="deleteCita('${c.id}')">Eliminar</button>
+        </div>
+      </div>`;
+    }
+
+    function renderAllCitas() {
+      const list = document.getElementById('citasList');
+      if (citasCache.length === 0) { list.innerHTML = '<div class="empty">No hay citas. ¡Crea la primera! 📅</div>'; return; }
+      list.innerHTML = citasCache.map(c => citaRow(c)).join('');
+    }
+
+    function renderStats() {
+      const hoy = new Date().toISOString().split('T')[0];
+      const citasHoy = citasCache.filter(c => c.fecha === hoy && c.estado !== 'cancelada');
+      const ingresosHoy = citasCache.filter(c => c.fecha === hoy && c.estado === 'completada').reduce((a, c) => a + (c.precio || 0), 0);
+      document.getElementById('stat-citas').textContent = citasHoy.length;
+      document.getElementById('stat-ingresos').textContent = `$${ingresosHoy}`;
+      document.getElementById('stat-clientes').textContent = clientesCount;
+    }
+
+    // ===== MODAL CREAR CITA =====
+    const citaModal = document.getElementById('citaModal');
+    function openCitaModal() {
+      cargarServiciosEnSelect();
+      document.getElementById('citaFecha').value = selectedDay;
+      document.getElementById('citaError').classList.remove('show');
+      document.getElementById('citaSuccess').classList.remove('show');
+      citaModal.classList.add('open');
+    }
+    document.getElementById('openCitaModal').addEventListener('click', openCitaModal);
+    document.getElementById('openCitaModal2').addEventListener('click', openCitaModal);
+    document.getElementById('closeCitaModal').addEventListener('click', () => citaModal.classList.remove('open'));
+    citaModal.addEventListener('click', (e) => { if (e.target === citaModal) citaModal.classList.remove('open'); });
 
     document.getElementById('citaForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const errorBox = document.getElementById('citaError');
       const successBox = document.getElementById('citaSuccess');
-      errorBox.classList.remove('show');
-      successBox.classList.remove('show');
+      errorBox.classList.remove('show'); successBox.classList.remove('show');
 
       const cliente_nombre = document.getElementById('citaCliente').value.trim();
       const cliente_telefono = document.getElementById('citaTelefono').value.trim();
@@ -516,94 +578,76 @@
       const hora_inicio = document.getElementById('citaHora').value;
 
       if (!cliente_nombre || !cliente_telefono || !servicioId || !fecha || !hora_inicio) return;
-
       const servicio = serviciosCache.find(s => s.id === servicioId);
       if (!servicio) return;
 
-      // Calcular hora_fin
       const [h, m] = hora_inicio.split(':').map(Number);
       const fin = new Date(2000, 0, 1, h, m + servicio.duracion);
       const hora_fin = `${String(fin.getHours()).padStart(2,'0')}:${String(fin.getMinutes()).padStart(2,'0')}`;
 
-      // VALIDACIÓN DE CRUCES
       try {
         const snapshot = await db.collection('negocios').doc(currentUser.uid).collection('citas')
-          .where('fecha', '==', fecha)
-          .where('estado', '!=', 'cancelada')
-          .get();
-
+          .where('fecha', '==', fecha).where('estado', '!=', 'cancelada').get();
         let hayCruce = false;
         snapshot.forEach(doc => {
           const c = doc.data();
-          // Dos rangos [A,B] y [C,D] se traslapan si A < D y C < B
-          if (hora_inicio < c.hora_fin && c.hora_inicio < hora_fin) {
-            hayCruce = true;
-          }
+          if (hora_inicio < c.hora_fin && c.hora_inicio < hora_fin) hayCruce = true;
         });
-
         if (hayCruce) {
           errorBox.textContent = '⚠️ Ya existe una cita en ese horario. Elige otra hora.';
-          errorBox.classList.add('show');
-          return;
+          errorBox.classList.add('show'); return;
         }
-
         const btn = e.target.querySelector('button');
-        btn.disabled = true;
-        btn.textContent = 'Creando...';
-
+        btn.disabled = true; btn.textContent = 'Creando...';
         await db.collection('negocios').doc(currentUser.uid).collection('citas').add({
-          cliente_nombre,
-          cliente_telefono,
-          servicio_id: servicioId,
-          servicio_nombre: servicio.nombre,
-          precio: servicio.precio,
-          duracion: servicio.duracion,
-          fecha,
-          hora_inicio,
-          hora_fin,
-          estado: 'pendiente',
-          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          cliente_nombre, cliente_telefono, servicio_id: servicioId, servicio_nombre: servicio.nombre,
+          precio: servicio.precio, duracion: servicio.duracion, fecha, hora_inicio, hora_fin,
+          estado: 'pendiente', createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
-
-        // Actualizar/crear cliente
         await db.collection('negocios').doc(currentUser.uid).collection('clientes').add({
-          nombre: cliente_nombre,
-          telefono: cliente_telefono,
-          sellos: 0,
+          nombre: cliente_nombre, telefono: cliente_telefono, sellos: 0,
           ultima_visita: firebase.firestore.FieldValue.serverTimestamp()
         });
-
         successBox.textContent = '✅ Cita creada exitosamente';
         successBox.classList.add('show');
         e.target.reset();
         document.getElementById('citaFecha').value = fecha;
-
+        setTimeout(() => citaModal.classList.remove('open'), 900);
       } catch (err) {
-        errorBox.textContent = 'Error: ' + err.message;
-        errorBox.classList.add('show');
+        errorBox.textContent = 'Error: ' + err.message; errorBox.classList.add('show');
       } finally {
         const btn = e.target.querySelector('button');
-        btn.disabled = false;
-        btn.textContent = 'Crear cita';
+        btn.disabled = false; btn.textContent = 'Crear cita';
       }
     });
 
     window.updateCita = async (id, estado) => {
-      try {
-        await db.collection('negocios').doc(currentUser.uid).collection('citas').doc(id).update({ estado });
-      } catch (err) {
-        alert('Error: ' + err.message);
-      }
+      try { await db.collection('negocios').doc(currentUser.uid).collection('citas').doc(id).update({ estado }); }
+      catch (err) { alert('Error: ' + err.message); }
     };
-
     window.deleteCita = async (id) => {
       if (!confirm('¿Eliminar esta cita?')) return;
-      try {
-        await db.collection('negocios').doc(currentUser.uid).collection('citas').doc(id).delete();
-      } catch (err) {
-        alert('Error: ' + err.message);
-      }
+      try { await db.collection('negocios').doc(currentUser.uid).collection('citas').doc(id).delete(); }
+      catch (err) { alert('Error: ' + err.message); }
     };
+
+    // ===== MODAL GANANCIAS =====
+    const gananciasModal = document.getElementById('gananciasModal');
+    function openGanancias() {
+      const completadas = citasCache.filter(c => c.estado === 'completada');
+      const total = completadas.reduce((a, c) => a + (c.precio || 0), 0);
+      document.getElementById('gainTotal').textContent = `$${total}`;
+      const list = document.getElementById('gainList');
+      if (completadas.length === 0) { list.innerHTML = '<div class="empty">Aún no hay ganancias registradas.</div>'; }
+      else {
+        list.innerHTML = completadas.map(c =>
+          `<div class="gain-row"><span>${c.fecha} · ${c.cliente_nombre} · ${c.servicio_nombre}</span><b>$${c.precio || 0}</b></div>`
+        ).join('');
+      }
+      gananciasModal.classList.add('open');
+    }
+    document.getElementById('closeGanancias').addEventListener('click', () => gananciasModal.classList.remove('open'));
+    gananciasModal.addEventListener('click', (e) => { if (e.target === gananciasModal) gananciasModal.classList.remove('open'); });
 
     // ===== CLIENTES =====
     function loadClientes() {
@@ -611,38 +655,30 @@
       db.collection('negocios').doc(currentUser.uid).collection('clientes')
         .orderBy('ultima_visita', 'desc')
         .onSnapshot((snap) => {
+          clientesCount = snap.size;
           if (snap.empty) {
-            list.innerHTML = '<div class="empty">Aún no tienes clientes registrados. Se agregarán automáticamente cuando crees una cita.</div>';
-            document.getElementById('stat-clientes').textContent = '0';
-            return;
+            list.innerHTML = '<div class="empty">Aún no tienes clientes registrados. Se agregan al crear una cita.</div>';
+            renderStats(); return;
           }
           let html = '';
-          let count = 0;
           snap.forEach(doc => {
-            count++;
             const c = doc.data();
-            const sellosHtml = Array.from({length: 5}, (_, i) => 
+            const sellosHtml = Array.from({length: 5}, (_, i) =>
               `<div class="sello ${i < (c.sellos || 0) ? '' : 'vacio'}">${i < (c.sellos || 0) ? '✓' : ''}</div>`
             ).join('');
-            html += `
-              <div class="cliente-item">
-                <div class="cliente-info">
-                  <h4>${c.nombre}</h4>
-                  <span>📱 ${c.telefono} · Última visita: ${c.ultima_visita ? new Date(c.ultima_visita.toDate()).toLocaleDateString('es-MX') : '—'}</span>
-                  <div class="sellos">${sellosHtml} <span style="margin-left:8px;font-size:.82rem;color:var(--muted)">${c.sellos || 0}/5 sellos</span></div>
-                </div>
-                <div style="display:flex;gap:8px">
-                  <button class="btn btn-primary btn-sm" onclick="addSello('${doc.id}', ${c.sellos || 0})">+ Sello</button>
-                  <button class="btn btn-danger btn-sm" onclick="deleteCliente('${doc.id}')">Eliminar</button>
-                </div>
-              </div>`;
+            html += `<div class="cliente-item">
+              <div class="cliente-info"><h4>${c.nombre}</h4>
+              <span>📱 ${c.telefono} · Última visita: ${c.ultima_visita ? new Date(c.ultima_visita.toDate()).toLocaleDateString('es-MX') : '—'}</span>
+              <div class="sellos">${sellosHtml} <span style="margin-left:8px;font-size:.82rem;color:var(--muted)">${c.sellos || 0}/5 sellos</span></div></div>
+              <div style="display:flex;gap:8px">
+                <button class="btn btn-primary btn-sm" onclick="addSello('${doc.id}', ${c.sellos || 0})">+ Sello</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteCliente('${doc.id}')">Eliminar</button>
+              </div>
+            </div>`;
           });
           list.innerHTML = html;
-          document.getElementById('stat-clientes').textContent = count;
-        }, (err) => {
-          console.error(err);
-          list.innerHTML = '<div class="empty">Error al cargar clientes.</div>';
-        });
+          renderStats();
+        }, (err) => { console.error(err); list.innerHTML = '<div class="empty">Error al cargar clientes.</div>'; });
     }
 
     window.addSello = async (id, actual) => {
@@ -653,18 +689,12 @@
           alert('🎉 ¡Cliente completó 5 sellos! Ofrécele su premio (ej. servicio gratis).');
           await db.collection('negocios').doc(currentUser.uid).collection('clientes').doc(id).update({ sellos: 0 });
         }
-      } catch (err) {
-        alert('Error: ' + err.message);
-      }
+      } catch (err) { alert('Error: ' + err.message); }
     };
-
     window.deleteCliente = async (id) => {
       if (!confirm('¿Eliminar este cliente?')) return;
-      try {
-        await db.collection('negocios').doc(currentUser.uid).collection('clientes').doc(id).delete();
-      } catch (err) {
-        alert('Error: ' + err.message);
-      }
+      try { await db.collection('negocios').doc(currentUser.uid).collection('clientes').doc(id).delete(); }
+      catch (err) { alert('Error: ' + err.message); }
     };
 
     // ===== CERRAR SESIÓN =====
